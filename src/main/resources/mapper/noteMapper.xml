@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssy.dao.noteMapper" >
+  <resultMap id="BaseResultMap" type="com.ssy.pojo.note" >
+    <id column="noteid" property="noteid" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="notename" property="notename" jdbcType="VARCHAR" />
+    <result column="notetime" property="notetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ssy.pojo.note" extends="BaseResultMap" >
+    <result column="notecontent" property="notecontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    noteid, userid, notename, notetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    notecontent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from note
+    where noteid = #{noteid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from note
+    where noteid = #{noteid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ssy.pojo.note" >
+    insert into note (noteid, userid, notename, 
+      notetime, notecontent)
+    values (#{noteid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{notename,jdbcType=VARCHAR}, 
+      #{notetime,jdbcType=TIMESTAMP}, #{notecontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssy.pojo.note" >
+    insert into note
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noteid != null" >
+        noteid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="notename != null" >
+        notename,
+      </if>
+      <if test="notetime != null" >
+        notetime,
+      </if>
+      <if test="notecontent != null" >
+        notecontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noteid != null" >
+        #{noteid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="notename != null" >
+        #{notename,jdbcType=VARCHAR},
+      </if>
+      <if test="notetime != null" >
+        #{notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notecontent != null" >
+        #{notecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssy.pojo.note" >
+    update note
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="notename != null" >
+        notename = #{notename,jdbcType=VARCHAR},
+      </if>
+      <if test="notetime != null" >
+        notetime = #{notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notecontent != null" >
+        notecontent = #{notecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where noteid = #{noteid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ssy.pojo.note" >
+    update note
+    set userid = #{userid,jdbcType=VARCHAR},
+      notename = #{notename,jdbcType=VARCHAR},
+      notetime = #{notetime,jdbcType=TIMESTAMP},
+      notecontent = #{notecontent,jdbcType=LONGVARCHAR}
+    where noteid = #{noteid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssy.pojo.note" >
+    update note
+    set userid = #{userid,jdbcType=VARCHAR},
+      notename = #{notename,jdbcType=VARCHAR},
+      notetime = #{notetime,jdbcType=TIMESTAMP}
+    where noteid = #{noteid,jdbcType=VARCHAR}
+  </update>
+</mapper>

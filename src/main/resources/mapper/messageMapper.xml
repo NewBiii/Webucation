@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssy.dao.messageMapper" >
+  <resultMap id="BaseResultMap" type="com.ssy.pojo.message" >
+    <id column="messageid" property="messageid" jdbcType="VARCHAR" />
+    <result column="courseid" property="courseid" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="messagetime" property="messagetime" jdbcType="TIMESTAMP" />
+    <result column="responsetime" property="responsetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ssy.pojo.messageWithBLOBs" extends="BaseResultMap" >
+    <result column="messagecontent" property="messagecontent" jdbcType="LONGVARCHAR" />
+    <result column="messageresponse" property="messageresponse" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    messageid, courseid, userid, messagetime, responsetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    messagecontent, messageresponse
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    where messageid = #{messageid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from message
+    where messageid = #{messageid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ssy.pojo.messageWithBLOBs" >
+    insert into message (messageid, courseid, userid, 
+      messagetime, responsetime, messagecontent, 
+      messageresponse)
+    values (#{messageid,jdbcType=VARCHAR}, #{courseid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{messagetime,jdbcType=TIMESTAMP}, #{responsetime,jdbcType=TIMESTAMP}, #{messagecontent,jdbcType=LONGVARCHAR}, 
+      #{messageresponse,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssy.pojo.messageWithBLOBs" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        messageid,
+      </if>
+      <if test="courseid != null" >
+        courseid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="messagetime != null" >
+        messagetime,
+      </if>
+      <if test="responsetime != null" >
+        responsetime,
+      </if>
+      <if test="messagecontent != null" >
+        messagecontent,
+      </if>
+      <if test="messageresponse != null" >
+        messageresponse,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetime != null" >
+        #{messagetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="responsetime != null" >
+        #{responsetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messagecontent != null" >
+        #{messagecontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="messageresponse != null" >
+        #{messageresponse,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssy.pojo.messageWithBLOBs" >
+    update message
+    <set >
+      <if test="courseid != null" >
+        courseid = #{courseid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetime != null" >
+        messagetime = #{messagetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="responsetime != null" >
+        responsetime = #{responsetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messagecontent != null" >
+        messagecontent = #{messagecontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="messageresponse != null" >
+        messageresponse = #{messageresponse,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where messageid = #{messageid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ssy.pojo.messageWithBLOBs" >
+    update message
+    set courseid = #{courseid,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      messagetime = #{messagetime,jdbcType=TIMESTAMP},
+      responsetime = #{responsetime,jdbcType=TIMESTAMP},
+      messagecontent = #{messagecontent,jdbcType=LONGVARCHAR},
+      messageresponse = #{messageresponse,jdbcType=LONGVARCHAR}
+    where messageid = #{messageid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssy.pojo.message" >
+    update message
+    set courseid = #{courseid,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      messagetime = #{messagetime,jdbcType=TIMESTAMP},
+      responsetime = #{responsetime,jdbcType=TIMESTAMP}
+    where messageid = #{messageid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssy.dao.userMapper" >
+  <resultMap id="BaseResultMap" type="com.ssy.pojo.user" >
+    <id column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="userpassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="userintroduce" property="userintroduce" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="useremail" property="useremail" jdbcType="VARCHAR" />
+    <result column="userphoneNum" property="userphonenum" jdbcType="INTEGER" />
+    <result column="userbirthday" property="userbirthday" jdbcType="DATE" />
+    <result column="userlevel" property="userlevel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userid, username, userpassword, userintroduce, sex, useremail, userphoneNum, userbirthday, 
+    userlevel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where userid = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ssy.pojo.user" >
+    insert into user (userid, username, userpassword, 
+      userintroduce, sex, useremail, 
+      userphoneNum, userbirthday, userlevel
+      )
+    values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, 
+      #{userintroduce,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{useremail,jdbcType=VARCHAR}, 
+      #{userphonenum,jdbcType=INTEGER}, #{userbirthday,jdbcType=DATE}, #{userlevel,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssy.pojo.user" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="userpassword != null" >
+        userpassword,
+      </if>
+      <if test="userintroduce != null" >
+        userintroduce,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="useremail != null" >
+        useremail,
+      </if>
+      <if test="userphonenum != null" >
+        userphoneNum,
+      </if>
+      <if test="userbirthday != null" >
+        userbirthday,
+      </if>
+      <if test="userlevel != null" >
+        userlevel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userintroduce != null" >
+        #{userintroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="useremail != null" >
+        #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="userphonenum != null" >
+        #{userphonenum,jdbcType=INTEGER},
+      </if>
+      <if test="userbirthday != null" >
+        #{userbirthday,jdbcType=DATE},
+      </if>
+      <if test="userlevel != null" >
+        #{userlevel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssy.pojo.user" >
+    update user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        userpassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userintroduce != null" >
+        userintroduce = #{userintroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="useremail != null" >
+        useremail = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="userphonenum != null" >
+        userphoneNum = #{userphonenum,jdbcType=INTEGER},
+      </if>
+      <if test="userbirthday != null" >
+        userbirthday = #{userbirthday,jdbcType=DATE},
+      </if>
+      <if test="userlevel != null" >
+        userlevel = #{userlevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssy.pojo.user" >
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      userpassword = #{userpassword,jdbcType=VARCHAR},
+      userintroduce = #{userintroduce,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      useremail = #{useremail,jdbcType=VARCHAR},
+      userphoneNum = #{userphonenum,jdbcType=INTEGER},
+      userbirthday = #{userbirthday,jdbcType=DATE},
+      userlevel = #{userlevel,jdbcType=INTEGER}
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>
