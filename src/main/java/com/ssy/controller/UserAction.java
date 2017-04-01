@@ -26,10 +26,9 @@ public class UserAction
     private final Logger logger = Logger.getLogger("");
 
 	// http://localhost:8080/ssmdemo/user/login?userid=zxy&password=123456
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(UserEntity user) throws Exception
 	{
-		System.out.println("sssssssssss");
 		ModelAndView mov = new ModelAndView();
 		
 		if (userService.login(user.getUserid(), user.getUserpassword()) == Consts.RESULT_SUCCESS)
@@ -46,7 +45,7 @@ public class UserAction
 	}
 
 	// http://localhost:8080/ssmdemo/user/register?userid=zxy01&password=123456
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView register(UserEntity user) throws Exception
 	{
 

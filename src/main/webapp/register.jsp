@@ -1,7 +1,15 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: NewBee
+  Date: 2017/3/31
+  Time: 13:37
+  To change this template use File | Settings | File Templates.
+--%>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+
 <html>
 <head>
-    <title>用户登录</title>
+    <title>用户注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入 Bootstrap -->
     <link
@@ -13,20 +21,21 @@
 <body>
 
 <div class="container">
+
     <div class="row clearfix">
         <div class="col-md-12 column"> </div>
     </div>
     <div class="row clearfix">
         <div class="col-md-2 column"></div>
         <div class="col-md-6 column">
-            <h3 class="text-center">欢迎使用网络学习系统</h3>
+            <h3 class="text-center">欢迎注册用户</h3>
             <h3 class="text-center"></h3>
 
-            <form action="/user/login" method="get" class="form-horizontal" role="form">
+            <form action="/user/register" method="post" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">账户</label>
                     <div class="col-sm-10">
-                        <input type="test" class="form-control" id="inputEmail3" name="userid"/>
+                        <input type="text" class="form-control" id="inputEmail3" name="userid"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -35,17 +44,11 @@
                         <input type="password" class="form-control" id="inputPassword3" name="userpassword"/>
                     </div>
                 </div>
+               
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <div class="checkbox">
-                            <label><input type="checkbox" />记住密码</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">登录</button>
-                      <%--  <button type="submit" class="btn btn-default">注册</button>--%>
+                        <button type="submit" class="btn btn-default">注册</button>
+                        <a href="login.jsp"><submit class="btn btn-default">返回登录</submit></a>
                     </div>
                 </div>
             </form>
@@ -55,3 +58,4 @@
 </div>
 </body>
 </html>
+
