@@ -19,7 +19,25 @@
 </head>
 
 <body>
-
+<jsp:include page="views/header.jsp" flush="true"/>
+<div>
+    <table>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+    </table>
+</div>
+<div>
+    <table>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+    </table>
+</div>
 <div class="container">
 
     <div class="row clearfix">
