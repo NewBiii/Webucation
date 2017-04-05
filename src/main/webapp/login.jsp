@@ -23,9 +23,7 @@
             login.submit();
         }
 
-
     </script>
-
 </head>
 
 <body>
@@ -56,7 +54,7 @@
     <div class="row clearfix">
         <div class="col-md-2 column"></div>
         <div class="col-md-6 column">
-            <h3 class="text-center">欢迎使用网络学习系统</h3>
+            <h3 class="text-center">登录网络学习系统</h3>
             <h3 class="text-center"></h3>
 
             <form name="login" method="post" class="form-horizontal" role="form">

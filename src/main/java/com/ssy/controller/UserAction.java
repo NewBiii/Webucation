@@ -25,7 +25,7 @@ public class UserAction
 	
     private final Logger logger = Logger.getLogger("");
 
-	// http://localhost:8080/ssmdemo/user/login?userid=zxy&password=123456
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(UserEntity user) throws Exception
 	{
@@ -44,7 +44,6 @@ public class UserAction
 		return mov;
 	}
 
-	// http://localhost:8080/ssmdemo/user/register?userid=zxy01&password=123456
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView register(UserEntity user) throws Exception
 	{

@@ -46,7 +46,7 @@ public class UserServiceImpl implements IUserService {
     	}
     	else
     	{
-	    	iRet = userMapper.insert(userEntity);
+	    	iRet = userMapper.insertSelective(userEntity);
 	
 			if (iRet>0)
 			{

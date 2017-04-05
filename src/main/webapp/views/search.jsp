@@ -103,11 +103,13 @@
             </ul>
         </div>
         <div class="col-md-4 column">
+            <div class="container">
             <h3>
-                h3. 这是一套可视化布局系统.
+广告招商席位
             </h3>
         </div>
     </div>
+</div>
 </div>
 
 </body>
