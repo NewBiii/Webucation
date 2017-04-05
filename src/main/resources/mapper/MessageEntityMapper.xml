@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssy.dao.MessageEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.ssy.entity.MessageEntity" >
+    <id column="messageid" property="messageid" jdbcType="BIGINT" />
+    <result column="iscourseornote" property="iscourseornote" jdbcType="INTEGER" />
+    <result column="courseornoteid" property="courseornoteid" jdbcType="BIGINT" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="messagetime" property="messagetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ssy.entity.MessageEntityWithBLOBs" extends="BaseResultMap" >
+    <result column="messagecontent" property="messagecontent" jdbcType="LONGVARCHAR" />
+    <result column="messageOption" property="messageoption" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    messageid, iscourseornote, courseornoteid, userid, messagetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    messagecontent, messageOption
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    where messageid = #{messageid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from message
+    where messageid = #{messageid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ssy.entity.MessageEntityWithBLOBs" >
+    insert into message (messageid, iscourseornote, courseornoteid, 
+      userid, messagetime, messagecontent, 
+      messageOption)
+    values (#{messageid,jdbcType=BIGINT}, #{iscourseornote,jdbcType=INTEGER}, #{courseornoteid,jdbcType=BIGINT}, 
+      #{userid,jdbcType=VARCHAR}, #{messagetime,jdbcType=TIMESTAMP}, #{messagecontent,jdbcType=LONGVARCHAR}, 
+      #{messageoption,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssy.entity.MessageEntityWithBLOBs" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        messageid,
+      </if>
+      <if test="iscourseornote != null" >
+        iscourseornote,
+      </if>
+      <if test="courseornoteid != null" >
+        courseornoteid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="messagetime != null" >
+        messagetime,
+      </if>
+      <if test="messagecontent != null" >
+        messagecontent,
+      </if>
+      <if test="messageoption != null" >
+        messageOption,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        #{messageid,jdbcType=BIGINT},
+      </if>
+      <if test="iscourseornote != null" >
+        #{iscourseornote,jdbcType=INTEGER},
+      </if>
+      <if test="courseornoteid != null" >
+        #{courseornoteid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetime != null" >
+        #{messagetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messagecontent != null" >
+        #{messagecontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="messageoption != null" >
+        #{messageoption,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssy.entity.MessageEntityWithBLOBs" >
+    update message
+    <set >
+      <if test="iscourseornote != null" >
+        iscourseornote = #{iscourseornote,jdbcType=INTEGER},
+      </if>
+      <if test="courseornoteid != null" >
+        courseornoteid = #{courseornoteid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetime != null" >
+        messagetime = #{messagetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messagecontent != null" >
+        messagecontent = #{messagecontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="messageoption != null" >
+        messageOption = #{messageoption,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where messageid = #{messageid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ssy.entity.MessageEntityWithBLOBs" >
+    update message
+    set iscourseornote = #{iscourseornote,jdbcType=INTEGER},
+      courseornoteid = #{courseornoteid,jdbcType=BIGINT},
+      userid = #{userid,jdbcType=VARCHAR},
+      messagetime = #{messagetime,jdbcType=TIMESTAMP},
+      messagecontent = #{messagecontent,jdbcType=LONGVARCHAR},
+      messageOption = #{messageoption,jdbcType=VARBINARY}
+    where messageid = #{messageid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssy.entity.MessageEntity" >
+    update message
+    set iscourseornote = #{iscourseornote,jdbcType=INTEGER},
+      courseornoteid = #{courseornoteid,jdbcType=BIGINT},
+      userid = #{userid,jdbcType=VARCHAR},
+      messagetime = #{messagetime,jdbcType=TIMESTAMP}
+    where messageid = #{messageid,jdbcType=BIGINT}
+  </update>
+</mapper>
