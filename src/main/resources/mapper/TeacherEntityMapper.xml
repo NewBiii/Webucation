@@ -6,7 +6,7 @@
     <result column="teachername" property="teachername" jdbcType="VARCHAR" />
     <result column="teacherpassword" property="teacherpassword" jdbcType="VARCHAR" />
     <result column="teacherintroduce" property="teacherintroduce" jdbcType="VARCHAR" />
-    <result column="teachersex" property="teachersex" jdbcType="VARCHAR" />
+    <result column="teachersex" property="teachersex" jdbcType="INTEGER" />
     <result column="teacheremail" property="teacheremail" jdbcType="VARCHAR" />
     <result column="reacherphoneNum" property="reacherphonenum" jdbcType="INTEGER" />
     <result column="teacherbirthday" property="teacherbirthday" jdbcType="DATE" />
@@ -32,7 +32,7 @@
       reacherphoneNum, teacherbirthday, teacherspeciality
       )
     values (#{teacherid,jdbcType=VARCHAR}, #{teachername,jdbcType=VARCHAR}, #{teacherpassword,jdbcType=VARCHAR}, 
-      #{teacherintroduce,jdbcType=VARCHAR}, #{teachersex,jdbcType=VARCHAR}, #{teacheremail,jdbcType=VARCHAR}, 
+      #{teacherintroduce,jdbcType=VARCHAR}, #{teachersex,jdbcType=INTEGER}, #{teacheremail,jdbcType=VARCHAR}, 
       #{reacherphonenum,jdbcType=INTEGER}, #{teacherbirthday,jdbcType=DATE}, #{teacherspeciality,jdbcType=INTEGER}
       )
   </insert>
@@ -81,7 +81,7 @@
         #{teacherintroduce,jdbcType=VARCHAR},
       </if>
       <if test="teachersex != null" >
-        #{teachersex,jdbcType=VARCHAR},
+        #{teachersex,jdbcType=INTEGER},
       </if>
       <if test="teacheremail != null" >
         #{teacheremail,jdbcType=VARCHAR},
@@ -110,7 +110,7 @@
         teacherintroduce = #{teacherintroduce,jdbcType=VARCHAR},
       </if>
       <if test="teachersex != null" >
-        teachersex = #{teachersex,jdbcType=VARCHAR},
+        teachersex = #{teachersex,jdbcType=INTEGER},
       </if>
       <if test="teacheremail != null" >
         teacheremail = #{teacheremail,jdbcType=VARCHAR},
@@ -132,7 +132,7 @@
     set teachername = #{teachername,jdbcType=VARCHAR},
       teacherpassword = #{teacherpassword,jdbcType=VARCHAR},
       teacherintroduce = #{teacherintroduce,jdbcType=VARCHAR},
-      teachersex = #{teachersex,jdbcType=VARCHAR},
+      teachersex = #{teachersex,jdbcType=INTEGER},
       teacheremail = #{teacheremail,jdbcType=VARCHAR},
       reacherphoneNum = #{reacherphonenum,jdbcType=INTEGER},
       teacherbirthday = #{teacherbirthday,jdbcType=DATE},

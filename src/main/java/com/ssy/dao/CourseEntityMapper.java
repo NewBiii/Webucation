@@ -4,13 +4,13 @@ import com.ssy.entity.CourseEntity;
 import com.ssy.entity.CourseEntityWithBLOBs;
 
 public interface CourseEntityMapper {
-    int deleteByPrimaryKey(Long courseid);
+    int deleteByPrimaryKey(Integer courseid);
 
     int insert(CourseEntityWithBLOBs record);
 
     int insertSelective(CourseEntityWithBLOBs record);
 
-    CourseEntityWithBLOBs selectByPrimaryKey(Long courseid);
+    CourseEntityWithBLOBs selectByPrimaryKey(Integer courseid);
 
     int updateByPrimaryKeySelective(CourseEntityWithBLOBs record);
 

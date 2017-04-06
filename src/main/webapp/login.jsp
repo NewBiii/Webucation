@@ -16,14 +16,6 @@
             href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"
             rel="stylesheet">
 
-    <script language="JavaScript">
-
-        function dologin(login) {
-            login.action = "/user/login";
-            login.submit();
-        }
-
-    </script>
 </head>
 
 <body>
@@ -57,7 +49,7 @@
             <h3 class="text-center">登录网络学习系统</h3>
             <h3 class="text-center"></h3>
 
-            <form name="login" method="post" class="form-horizontal" role="form">
+            <form action = "/user/login" name="login" method="post" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">账户</label>
                     <div class="col-sm-10">
@@ -79,10 +71,9 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default" onclick="dologin(login)">登录</button>
-                        <a href="register.jsp">注册</a>
+                        <button type="submit" class="btn btn-default">登录</button>
+                        <a href="register.jsp" class="btn btn-default">注册</a>
                     </div>
-
                 </div>
             </form>
         </div>

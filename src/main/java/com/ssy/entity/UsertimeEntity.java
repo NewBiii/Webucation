@@ -11,7 +11,7 @@ public class UsertimeEntity {
 
     private Date logouttime;
 
-    private Long onlinetime;
+    private Integer onlinetime;
 
     public String getLogid() {
         return logid;
@@ -45,11 +45,11 @@ public class UsertimeEntity {
         this.logouttime = logouttime;
     }
 
-    public Long getOnlinetime() {
+    public Integer getOnlinetime() {
         return onlinetime;
     }
 
-    public void setOnlinetime(Long onlinetime) {
+    public void setOnlinetime(Integer onlinetime) {
         this.onlinetime = onlinetime;
     }
 }

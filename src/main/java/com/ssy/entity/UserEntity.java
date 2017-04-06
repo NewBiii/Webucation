@@ -11,7 +11,7 @@ public class UserEntity {
 
     private String userintroduce;
 
-    private String sex;
+    private Integer sex;
 
     private String useremail;
 
@@ -51,12 +51,12 @@ public class UserEntity {
         this.userintroduce = userintroduce == null ? null : userintroduce.trim();
     }
 
-    public String getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 
     public String getUseremail() {

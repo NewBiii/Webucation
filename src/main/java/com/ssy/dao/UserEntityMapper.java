@@ -5,9 +5,9 @@ import com.ssy.entity.UserEntity;
 import java.util.List;
 
 public interface UserEntityMapper {
-
-    List<UserEntity> getAllUser(UserEntity record);
-
+	
+	 List<UserEntity> getAllUser(UserEntity record);
+	
     int deleteByPrimaryKey(String userid);
 
     int insert(UserEntity record);

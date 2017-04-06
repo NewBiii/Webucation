@@ -3,7 +3,7 @@ package com.ssy.entity;
 import java.util.Date;
 
 public class EvaluationEntity {
-    private Long evaluationid;
+    private Integer evaluationid;
 
     private Integer iscourseornote;
 
@@ -15,11 +15,11 @@ public class EvaluationEntity {
 
     private Date evaluationtime;
 
-    public Long getEvaluationid() {
+    public Integer getEvaluationid() {
         return evaluationid;
     }
 
-    public void setEvaluationid(Long evaluationid) {
+    public void setEvaluationid(Integer evaluationid) {
         this.evaluationid = evaluationid;
     }
 

@@ -5,8 +5,6 @@ import com.ssy.dao.UserEntityMapper;
 import com.ssy.entity.UserEntity;
 import com.ssy.service.IUserService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,16 +19,17 @@ public class UserServiceImpl implements IUserService {
     private UserEntityMapper userMapper;
     
     @Override
-	public int login(String username,String password) 
+	public UserEntity login(String userid,String password)
 	{
     	int iRet = Consts.RESULT_FAILURE;
-		UserEntity userEntity = userMapper.selectByPrimaryKey(username);
+		UserEntity userEntity = this.userMapper.selectByPrimaryKey(userid);
 
 		if (userEntity != null && password.equals(userEntity.getUserpassword()))
 		{
 			iRet = Consts.RESULT_SUCCESS;
+			return userEntity;
 		} 
-        return iRet;  
+        return null;
 	}
 
     @Override  
@@ -81,17 +80,6 @@ public class UserServiceImpl implements IUserService {
 	public int updateUser(UserEntity user)
 	{
 		return this.userMapper.updateByPrimaryKey(user);
-	}
-	
-	@Override
-	@Transactional(propagation=Propagation.REQUIRED)
-	public int transUser(UserEntity user)
-	{
-			 this.userMapper.insert(user);
-			 user.setUserid("zxy01");
-			 this.userMapper.insert(user);
-
-		 return 1;
 	}
 
 }  

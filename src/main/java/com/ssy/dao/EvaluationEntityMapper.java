@@ -3,13 +3,13 @@ package com.ssy.dao;
 import com.ssy.entity.EvaluationEntity;
 
 public interface EvaluationEntityMapper {
-    int deleteByPrimaryKey(Long evaluationid);
+    int deleteByPrimaryKey(Integer evaluationid);
 
     int insert(EvaluationEntity record);
 
     int insertSelective(EvaluationEntity record);
 
-    EvaluationEntity selectByPrimaryKey(Long evaluationid);
+    EvaluationEntity selectByPrimaryKey(Integer evaluationid);
 
     int updateByPrimaryKeySelective(EvaluationEntity record);
 

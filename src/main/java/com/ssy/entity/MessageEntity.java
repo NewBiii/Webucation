@@ -3,21 +3,21 @@ package com.ssy.entity;
 import java.util.Date;
 
 public class MessageEntity {
-    private Long messageid;
+    private Integer messageid;
 
     private Integer iscourseornote;
 
-    private Long courseornoteid;
+    private Integer courseornoteid;
 
     private String userid;
 
     private Date messagetime;
 
-    public Long getMessageid() {
+    public Integer getMessageid() {
         return messageid;
     }
 
-    public void setMessageid(Long messageid) {
+    public void setMessageid(Integer messageid) {
         this.messageid = messageid;
     }
 
@@ -29,11 +29,11 @@ public class MessageEntity {
         this.iscourseornote = iscourseornote;
     }
 
-    public Long getCourseornoteid() {
+    public Integer getCourseornoteid() {
         return courseornoteid;
     }
 
-    public void setCourseornoteid(Long courseornoteid) {
+    public void setCourseornoteid(Integer courseornoteid) {
         this.courseornoteid = courseornoteid;
     }
 

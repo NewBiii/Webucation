@@ -12,7 +12,7 @@
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 
-    <title>Title</title>
+    <title>记笔记</title>
 </head>
 <body>
 <jsp:include page="header.jsp" flush="true"/>
@@ -28,17 +28,17 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <form role="form">
+            <form action="/note/submit" method="post" role="form">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">题目</label><input type="text" class="form-control" id="exampleInputEmail1" />
+                    <label for="exampleInputEmail1">笔记标题</label><input type="text" class="form-control" id="exampleInputEmail1" name="noteid"/>
                 </div>
-                <div class="form-group" contenteditable="true">
-                    <label for="exampleInputPassword1">内容</label><textarea type="" style="height:50%;" class="form-control" id="exampleInputPassword1"></textarea>
+                <div class="form-group" contenteditable="FALSE">
+                    <label for="exampleInputPassword1">笔记内容</label><textarea type="" style="height:50%;" class="form-control" id="exampleInputPassword1" name="notecontent"></textarea>
                 </div>
                     <div class="form-group">
-                        <label for="exampleInputFile">附件上传</label><input type="file" id="exampleInputFile" />
+                        <label for="exampleInputFile">附件上传</label><input type="file" id="exampleInputFile" name="noteoption"/>
                         <p class="help-block">
-                           选择想要上传的文件
+                           有想要上传的文件吗？
                         </p>
                     </div>
                  <button type="submit" class="btn btn-default">提交</button>

@@ -69,7 +69,7 @@
             </blockquote>
             <blockquote>
                 <p>
-                   <a href="../test.jsp"> Lorem ipsum dolor 地方建设开发环境和it amet, consectetur adipiscing elit. Integer posuere erat a ante.</a>
+                   <a href="test.jsp"> Lorem ipsum dolor 地方建设开发环境和it amet, consectetur adipiscing elit. Integer posuere erat a ante.</a>
                 </p>
                 <small>Someone famous <cite>Source Title</cite></small>
             </blockquote>

@@ -31,19 +31,19 @@
 
             <div class="jumbotron">
                 <h1>
-                    Hello, world!
+                   SSY课程学习
                 </h1>
                 <p>
-                    This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
+                    知识是引导人生到光明与真实境界的灯烛，愚暗是达到光明与真实境界的障碍，也就是人生发展的障碍。
                 </p>
                 <p>
-                    <a class="btn btn-primary btn-large" href="#">Learn more</a>
+                    <a class="btn btn-primary btn-large" href="#">了解更多</a>
                 </p>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="thumbnail">
-                        <img alt="300x200" src="images/8b483d4d60304b3a553d58f3934a4383.jpg" />
+                        <img alt="300x200" src="/images/8b483d4d60304b3a553d58f3934a4383.jpg" />
                         <div class="caption">
                             <h3>
                                 Thumbnail label
@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="thumbnail">
-                        <img alt="300x200" src="images/dfe092db405cb2fb909f8a73e42834ae.jpg" />
+                        <img alt="300x200" src="/images/118701.jpg" />
                         <div class="caption">
                             <h3>
                                 Thumbnail label
@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="thumbnail">
-                        <img alt="300x200" src="images/e95f9a13f4e56de1139f918ea3abb964.jpg" />
+                        <img alt="300x200" src="/images/e95f9a13f4e56de1139f918ea3abb964.jpg" />
                         <div class="caption">
                             <h3>
                                 Thumbnail label
@@ -94,7 +94,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="thumbnail">
-                        <img alt="300x200" src="images/1487315425856.jpg" />
+                        <img alt="300x200" src="/images/f36947322b98fd81a218366349351fc0.jpg" />
                         <div class="caption">
                             <h3>
                                 Thumbnail label
@@ -110,7 +110,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="thumbnail">
-                        <img alt="300x200" src="images/6b3c8b905840bac6bf96db790fecf1f2.jpg" />
+                        <img alt="300x200" src="/images/dfe092db405cb2fb909f8a73e42834ae.jpg" />
                         <div class="caption">
                             <h3>
                                 Thumbnail label
@@ -126,7 +126,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="thumbnail">
-                        <img alt="300x200" src="images/0fd1c40422ebc64dbf204ccf7ff02052.jpg" />
+                        <img alt="300x200" src="/images/81310.jpg" />
                         <div class="caption">
                             <h3>
                                 Thumbnail label

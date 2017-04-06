@@ -49,19 +49,19 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="userid" class="col-sm-2 control-label">账户</label>
+                    <label for="userid" class="col-sm-2 control-label"><font color="#FF0000">*</font>账户</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="userid" name="userid"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                    <label for="inputPassword3" class="col-sm-2 control-label"><font color="#FF0000">*</font>密码</label>
                     <div class="col-sm-10">
                         <input type="password" class="form-control" id="inputPassword3" name="userpassword"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword4" class="col-sm-2 control-label">确认密码</label>
+                    <label for="inputPassword4" class="col-sm-2 control-label"><font color="#FF0000">*</font>确认密码</label>
                     <div class="col-sm-10">
                         <input type="password" class="form-control" id="inputPassword4" name="userpassword2"/>
                     </div>

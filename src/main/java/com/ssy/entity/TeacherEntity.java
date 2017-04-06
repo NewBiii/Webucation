@@ -11,7 +11,7 @@ public class TeacherEntity {
 
     private String teacherintroduce;
 
-    private String teachersex;
+    private Integer teachersex;
 
     private String teacheremail;
 
@@ -53,12 +53,12 @@ public class TeacherEntity {
         this.teacherintroduce = teacherintroduce == null ? null : teacherintroduce.trim();
     }
 
-    public String getTeachersex() {
+    public Integer getTeachersex() {
         return teachersex;
     }
 
-    public void setTeachersex(String teachersex) {
-        this.teachersex = teachersex == null ? null : teachersex.trim();
+    public void setTeachersex(Integer teachersex) {
+        this.teachersex = teachersex;
     }
 
     public String getTeacheremail() {

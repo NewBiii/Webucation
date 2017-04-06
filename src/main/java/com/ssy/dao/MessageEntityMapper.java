@@ -4,13 +4,13 @@ import com.ssy.entity.MessageEntity;
 import com.ssy.entity.MessageEntityWithBLOBs;
 
 public interface MessageEntityMapper {
-    int deleteByPrimaryKey(Long messageid);
+    int deleteByPrimaryKey(Integer messageid);
 
     int insert(MessageEntityWithBLOBs record);
 
     int insertSelective(MessageEntityWithBLOBs record);
 
-    MessageEntityWithBLOBs selectByPrimaryKey(Long messageid);
+    MessageEntityWithBLOBs selectByPrimaryKey(Integer messageid);
 
     int updateByPrimaryKeySelective(MessageEntityWithBLOBs record);
 

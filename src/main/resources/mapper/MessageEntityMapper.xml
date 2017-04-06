@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssy.dao.MessageEntityMapper" >
   <resultMap id="BaseResultMap" type="com.ssy.entity.MessageEntity" >
-    <id column="messageid" property="messageid" jdbcType="BIGINT" />
+    <id column="messageid" property="messageid" jdbcType="INTEGER" />
     <result column="iscourseornote" property="iscourseornote" jdbcType="INTEGER" />
-    <result column="courseornoteid" property="courseornoteid" jdbcType="BIGINT" />
+    <result column="courseornoteid" property="courseornoteid" jdbcType="INTEGER" />
     <result column="userid" property="userid" jdbcType="VARCHAR" />
     <result column="messagetime" property="messagetime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -18,23 +18,23 @@
   <sql id="Blob_Column_List" >
     messagecontent, messageOption
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from message
-    where messageid = #{messageid,jdbcType=BIGINT}
+    where messageid = #{messageid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from message
-    where messageid = #{messageid,jdbcType=BIGINT}
+    where messageid = #{messageid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ssy.entity.MessageEntityWithBLOBs" >
     insert into message (messageid, iscourseornote, courseornoteid, 
       userid, messagetime, messagecontent, 
       messageOption)
-    values (#{messageid,jdbcType=BIGINT}, #{iscourseornote,jdbcType=INTEGER}, #{courseornoteid,jdbcType=BIGINT}, 
+    values (#{messageid,jdbcType=INTEGER}, #{iscourseornote,jdbcType=INTEGER}, #{courseornoteid,jdbcType=INTEGER}, 
       #{userid,jdbcType=VARCHAR}, #{messagetime,jdbcType=TIMESTAMP}, #{messagecontent,jdbcType=LONGVARCHAR}, 
       #{messageoption,jdbcType=VARBINARY})
   </insert>
@@ -65,13 +65,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="messageid != null" >
-        #{messageid,jdbcType=BIGINT},
+        #{messageid,jdbcType=INTEGER},
       </if>
       <if test="iscourseornote != null" >
         #{iscourseornote,jdbcType=INTEGER},
       </if>
       <if test="courseornoteid != null" >
-        #{courseornoteid,jdbcType=BIGINT},
+        #{courseornoteid,jdbcType=INTEGER},
       </if>
       <if test="userid != null" >
         #{userid,jdbcType=VARCHAR},
@@ -94,7 +94,7 @@
         iscourseornote = #{iscourseornote,jdbcType=INTEGER},
       </if>
       <if test="courseornoteid != null" >
-        courseornoteid = #{courseornoteid,jdbcType=BIGINT},
+        courseornoteid = #{courseornoteid,jdbcType=INTEGER},
       </if>
       <if test="userid != null" >
         userid = #{userid,jdbcType=VARCHAR},
@@ -109,24 +109,24 @@
         messageOption = #{messageoption,jdbcType=VARBINARY},
       </if>
     </set>
-    where messageid = #{messageid,jdbcType=BIGINT}
+    where messageid = #{messageid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ssy.entity.MessageEntityWithBLOBs" >
     update message
     set iscourseornote = #{iscourseornote,jdbcType=INTEGER},
-      courseornoteid = #{courseornoteid,jdbcType=BIGINT},
+      courseornoteid = #{courseornoteid,jdbcType=INTEGER},
       userid = #{userid,jdbcType=VARCHAR},
       messagetime = #{messagetime,jdbcType=TIMESTAMP},
       messagecontent = #{messagecontent,jdbcType=LONGVARCHAR},
       messageOption = #{messageoption,jdbcType=VARBINARY}
-    where messageid = #{messageid,jdbcType=BIGINT}
+    where messageid = #{messageid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ssy.entity.MessageEntity" >
     update message
     set iscourseornote = #{iscourseornote,jdbcType=INTEGER},
-      courseornoteid = #{courseornoteid,jdbcType=BIGINT},
+      courseornoteid = #{courseornoteid,jdbcType=INTEGER},
       userid = #{userid,jdbcType=VARCHAR},
       messagetime = #{messagetime,jdbcType=TIMESTAMP}
-    where messageid = #{messageid,jdbcType=BIGINT}
+    where messageid = #{messageid,jdbcType=INTEGER}
   </update>
 </mapper>

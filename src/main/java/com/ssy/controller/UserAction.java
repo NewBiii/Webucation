@@ -1,16 +1,17 @@
 package com.ssy.controller;
 
+import com.ssy.consts.Consts;
+import com.ssy.entity.UserEntity;
+import com.ssy.service.IUserService;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import com.ssy.consts.Consts;
-import com.ssy.entity.UserEntity;
-import com.ssy.service.IUserService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @Controller
 //spring 默认scope 是单例模式，这样只会创建一个Action对象
@@ -27,18 +28,20 @@ public class UserAction
 
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(UserEntity user) throws Exception
+	public ModelAndView login(UserEntity user, HttpSession session) throws Exception
 	{
 		ModelAndView mov = new ModelAndView();
-		
-		if (userService.login(user.getUserid(), user.getUserpassword()) == Consts.RESULT_SUCCESS)
+		UserEntity user2 = userService.login(user.getUserid(), user.getUserpassword());
+		if (user2.getUsername() != null )
 		{
-			mov.setViewName("/test");
+			session.setAttribute("userid",user2.getUserid());
+			session.setAttribute("username",user2.getUsername());
+			mov.setViewName("/index");
 		}
 		else
 		{
 			logger.warn("登录失败。");
-			mov.setViewName("/loginError");
+			mov.setViewName("/views/loginError");
 			mov.addObject(Consts.OPERATION_MESSAGE,"用户名或密码错误。请再次输入。");
 		}
 		return mov;

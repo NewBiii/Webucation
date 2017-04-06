@@ -6,7 +6,7 @@
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="userpassword" property="userpassword" jdbcType="VARCHAR" />
     <result column="userintroduce" property="userintroduce" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
     <result column="useremail" property="useremail" jdbcType="VARCHAR" />
     <result column="userphoneNum" property="userphonenum" jdbcType="INTEGER" />
     <result column="userbirthday" property="userbirthday" jdbcType="DATE" />
@@ -25,7 +25,7 @@
             </if>   
 	</where>  
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ssy.entity.UserEntity" >
     select 
     <include refid="Base_Column_List" />
     from user
@@ -40,7 +40,7 @@
       userintroduce, sex, useremail, 
       userphoneNum, userbirthday)
     values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, 
-      #{userintroduce,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{useremail,jdbcType=VARCHAR}, 
+      #{userintroduce,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{useremail,jdbcType=VARCHAR}, 
       #{userphonenum,jdbcType=INTEGER}, #{userbirthday,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.ssy.entity.UserEntity" >
@@ -85,7 +85,7 @@
         #{userintroduce,jdbcType=VARCHAR},
       </if>
       <if test="sex != null" >
-        #{sex,jdbcType=VARCHAR},
+        #{sex,jdbcType=INTEGER},
       </if>
       <if test="useremail != null" >
         #{useremail,jdbcType=VARCHAR},
@@ -111,7 +111,7 @@
         userintroduce = #{userintroduce,jdbcType=VARCHAR},
       </if>
       <if test="sex != null" >
-        sex = #{sex,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=INTEGER},
       </if>
       <if test="useremail != null" >
         useremail = #{useremail,jdbcType=VARCHAR},
@@ -130,7 +130,7 @@
     set username = #{username,jdbcType=VARCHAR},
       userpassword = #{userpassword,jdbcType=VARCHAR},
       userintroduce = #{userintroduce,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
       useremail = #{useremail,jdbcType=VARCHAR},
       userphoneNum = #{userphonenum,jdbcType=INTEGER},
       userbirthday = #{userbirthday,jdbcType=DATE}

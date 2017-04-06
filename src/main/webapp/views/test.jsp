@@ -11,6 +11,15 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="/views/header.jsp" flush="true"/>
+<div>
+    <table>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+    </table>
+</div>
 <a>测试跳转页面</a>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssy.dao.EvaluationEntityMapper" >
   <resultMap id="BaseResultMap" type="com.ssy.entity.EvaluationEntity" >
-    <id column="evaluationid" property="evaluationid" jdbcType="BIGINT" />
+    <id column="evaluationid" property="evaluationid" jdbcType="INTEGER" />
     <result column="iscourseornote" property="iscourseornote" jdbcType="INTEGER" />
     <result column="courseornoteId" property="courseornoteid" jdbcType="VARCHAR" />
     <result column="userid" property="userid" jdbcType="VARCHAR" />
@@ -12,21 +12,21 @@
   <sql id="Base_Column_List" >
     evaluationid, iscourseornote, courseornoteId, userid, evaluationcontent, evaluationtime
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from evaluation
-    where evaluationid = #{evaluationid,jdbcType=BIGINT}
+    where evaluationid = #{evaluationid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from evaluation
-    where evaluationid = #{evaluationid,jdbcType=BIGINT}
+    where evaluationid = #{evaluationid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ssy.entity.EvaluationEntity" >
     insert into evaluation (evaluationid, iscourseornote, courseornoteId, 
       userid, evaluationcontent, evaluationtime
       )
-    values (#{evaluationid,jdbcType=BIGINT}, #{iscourseornote,jdbcType=INTEGER}, #{courseornoteid,jdbcType=VARCHAR}, 
+    values (#{evaluationid,jdbcType=INTEGER}, #{iscourseornote,jdbcType=INTEGER}, #{courseornoteid,jdbcType=VARCHAR}, 
       #{userid,jdbcType=VARCHAR}, #{evaluationcontent,jdbcType=VARCHAR}, #{evaluationtime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -54,7 +54,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="evaluationid != null" >
-        #{evaluationid,jdbcType=BIGINT},
+        #{evaluationid,jdbcType=INTEGER},
       </if>
       <if test="iscourseornote != null" >
         #{iscourseornote,jdbcType=INTEGER},
@@ -92,7 +92,7 @@
         evaluationtime = #{evaluationtime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where evaluationid = #{evaluationid,jdbcType=BIGINT}
+    where evaluationid = #{evaluationid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ssy.entity.EvaluationEntity" >
     update evaluation
@@ -101,6 +101,6 @@
       userid = #{userid,jdbcType=VARCHAR},
       evaluationcontent = #{evaluationcontent,jdbcType=VARCHAR},
       evaluationtime = #{evaluationtime,jdbcType=TIMESTAMP}
-    where evaluationid = #{evaluationid,jdbcType=BIGINT}
+    where evaluationid = #{evaluationid,jdbcType=INTEGER}
   </update>
 </mapper>

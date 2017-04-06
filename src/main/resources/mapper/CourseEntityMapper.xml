@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssy.dao.CourseEntityMapper" >
   <resultMap id="BaseResultMap" type="com.ssy.entity.CourseEntity" >
-    <id column="courseid" property="courseid" jdbcType="BIGINT" />
+    <id column="courseid" property="courseid" jdbcType="INTEGER" />
     <result column="teacherid" property="teacherid" jdbcType="VARCHAR" />
     <result column="coursename" property="coursename" jdbcType="VARCHAR" />
     <result column="coursetime" property="coursetime" jdbcType="TIMESTAMP" />
-    <result column="score5" property="score5" jdbcType="BIGINT" />
-    <result column="score4" property="score4" jdbcType="BIGINT" />
-    <result column="score3" property="score3" jdbcType="BIGINT" />
-    <result column="score2" property="score2" jdbcType="BIGINT" />
-    <result column="score1" property="score1" jdbcType="BIGINT" />
+    <result column="score5" property="score5" jdbcType="INTEGER" />
+    <result column="score4" property="score4" jdbcType="INTEGER" />
+    <result column="score3" property="score3" jdbcType="INTEGER" />
+    <result column="score2" property="score2" jdbcType="INTEGER" />
+    <result column="score1" property="score1" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ssy.entity.CourseEntityWithBLOBs" extends="BaseResultMap" >
     <result column="coursecontent" property="coursecontent" jdbcType="LONGVARCHAR" />
@@ -22,26 +22,26 @@
   <sql id="Blob_Column_List" >
     coursecontent, courseOption
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from course
-    where courseid = #{courseid,jdbcType=BIGINT}
+    where courseid = #{courseid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from course
-    where courseid = #{courseid,jdbcType=BIGINT}
+    where courseid = #{courseid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ssy.entity.CourseEntityWithBLOBs" >
     insert into course (courseid, teacherid, coursename, 
       coursetime, score5, score4, 
       score3, score2, score1, 
       coursecontent, courseOption)
-    values (#{courseid,jdbcType=BIGINT}, #{teacherid,jdbcType=VARCHAR}, #{coursename,jdbcType=VARCHAR}, 
-      #{coursetime,jdbcType=TIMESTAMP}, #{score5,jdbcType=BIGINT}, #{score4,jdbcType=BIGINT}, 
-      #{score3,jdbcType=BIGINT}, #{score2,jdbcType=BIGINT}, #{score1,jdbcType=BIGINT}, 
+    values (#{courseid,jdbcType=INTEGER}, #{teacherid,jdbcType=VARCHAR}, #{coursename,jdbcType=VARCHAR}, 
+      #{coursetime,jdbcType=TIMESTAMP}, #{score5,jdbcType=INTEGER}, #{score4,jdbcType=INTEGER}, 
+      #{score3,jdbcType=INTEGER}, #{score2,jdbcType=INTEGER}, #{score1,jdbcType=INTEGER}, 
       #{coursecontent,jdbcType=LONGVARCHAR}, #{courseoption,jdbcType=VARBINARY})
   </insert>
   <insert id="insertSelective" parameterType="com.ssy.entity.CourseEntityWithBLOBs" >
@@ -83,7 +83,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="courseid != null" >
-        #{courseid,jdbcType=BIGINT},
+        #{courseid,jdbcType=INTEGER},
       </if>
       <if test="teacherid != null" >
         #{teacherid,jdbcType=VARCHAR},
@@ -95,19 +95,19 @@
         #{coursetime,jdbcType=TIMESTAMP},
       </if>
       <if test="score5 != null" >
-        #{score5,jdbcType=BIGINT},
+        #{score5,jdbcType=INTEGER},
       </if>
       <if test="score4 != null" >
-        #{score4,jdbcType=BIGINT},
+        #{score4,jdbcType=INTEGER},
       </if>
       <if test="score3 != null" >
-        #{score3,jdbcType=BIGINT},
+        #{score3,jdbcType=INTEGER},
       </if>
       <if test="score2 != null" >
-        #{score2,jdbcType=BIGINT},
+        #{score2,jdbcType=INTEGER},
       </if>
       <if test="score1 != null" >
-        #{score1,jdbcType=BIGINT},
+        #{score1,jdbcType=INTEGER},
       </if>
       <if test="coursecontent != null" >
         #{coursecontent,jdbcType=LONGVARCHAR},
@@ -130,19 +130,19 @@
         coursetime = #{coursetime,jdbcType=TIMESTAMP},
       </if>
       <if test="score5 != null" >
-        score5 = #{score5,jdbcType=BIGINT},
+        score5 = #{score5,jdbcType=INTEGER},
       </if>
       <if test="score4 != null" >
-        score4 = #{score4,jdbcType=BIGINT},
+        score4 = #{score4,jdbcType=INTEGER},
       </if>
       <if test="score3 != null" >
-        score3 = #{score3,jdbcType=BIGINT},
+        score3 = #{score3,jdbcType=INTEGER},
       </if>
       <if test="score2 != null" >
-        score2 = #{score2,jdbcType=BIGINT},
+        score2 = #{score2,jdbcType=INTEGER},
       </if>
       <if test="score1 != null" >
-        score1 = #{score1,jdbcType=BIGINT},
+        score1 = #{score1,jdbcType=INTEGER},
       </if>
       <if test="coursecontent != null" >
         coursecontent = #{coursecontent,jdbcType=LONGVARCHAR},
@@ -151,32 +151,32 @@
         courseOption = #{courseoption,jdbcType=VARBINARY},
       </if>
     </set>
-    where courseid = #{courseid,jdbcType=BIGINT}
+    where courseid = #{courseid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ssy.entity.CourseEntityWithBLOBs" >
     update course
     set teacherid = #{teacherid,jdbcType=VARCHAR},
       coursename = #{coursename,jdbcType=VARCHAR},
       coursetime = #{coursetime,jdbcType=TIMESTAMP},
-      score5 = #{score5,jdbcType=BIGINT},
-      score4 = #{score4,jdbcType=BIGINT},
-      score3 = #{score3,jdbcType=BIGINT},
-      score2 = #{score2,jdbcType=BIGINT},
-      score1 = #{score1,jdbcType=BIGINT},
+      score5 = #{score5,jdbcType=INTEGER},
+      score4 = #{score4,jdbcType=INTEGER},
+      score3 = #{score3,jdbcType=INTEGER},
+      score2 = #{score2,jdbcType=INTEGER},
+      score1 = #{score1,jdbcType=INTEGER},
       coursecontent = #{coursecontent,jdbcType=LONGVARCHAR},
       courseOption = #{courseoption,jdbcType=VARBINARY}
-    where courseid = #{courseid,jdbcType=BIGINT}
+    where courseid = #{courseid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ssy.entity.CourseEntity" >
     update course
     set teacherid = #{teacherid,jdbcType=VARCHAR},
       coursename = #{coursename,jdbcType=VARCHAR},
       coursetime = #{coursetime,jdbcType=TIMESTAMP},
-      score5 = #{score5,jdbcType=BIGINT},
-      score4 = #{score4,jdbcType=BIGINT},
-      score3 = #{score3,jdbcType=BIGINT},
-      score2 = #{score2,jdbcType=BIGINT},
-      score1 = #{score1,jdbcType=BIGINT}
-    where courseid = #{courseid,jdbcType=BIGINT}
+      score5 = #{score5,jdbcType=INTEGER},
+      score4 = #{score4,jdbcType=INTEGER},
+      score3 = #{score3,jdbcType=INTEGER},
+      score2 = #{score2,jdbcType=INTEGER},
+      score1 = #{score1,jdbcType=INTEGER}
+    where courseid = #{courseid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,3 +1,4 @@
+<%@ page import="com.ssy.entity.UserEntity" %>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
@@ -63,6 +64,10 @@
                         </div> <button type="submit" class="btn btn-default">搜索</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
+                    <%
+                        String userid = null;
+                        userid = (String) session.getAttribute("userid");
+                        if (userid == null){%>
 
                         <li>
                             <a href="../../login.jsp">登录</a>
@@ -70,9 +75,38 @@
                         <li>
                             <a href="../../register.jsp">注册</a>
                         </li>
+
+                    <%}
+                        else{
+                    %>
+                        <li>
+                            <a href="/views/userInfo.jsp"><%=session.getAttribute("username")%>，欢迎！</a>
+                        </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">功能<strong class="caret"></strong></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/views/userInfo.jsp">个人信息</a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="/views/noteEdit.jsp">添加笔记</a>
+                            </li>
+                            <li>
+                                <a href="/views/courseEdit.jsp">编写课程</a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="#">用户注销</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <%}%>
                         <li>
                             <a>&nbsp;</a>
-
                         </li>
                     </ul>
                 </div>
