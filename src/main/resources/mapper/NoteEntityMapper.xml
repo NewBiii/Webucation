@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssy.dao.NoteEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.ssy.entity.NoteEntity" >
+    <id column="noteid" property="noteid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="notename" property="notename" jdbcType="VARCHAR" />
+    <result column="notetime" property="notetime" jdbcType="TIMESTAMP" />
+    <result column="isshow" property="isshow" jdbcType="INTEGER" />
+    <result column="score5" property="score5" jdbcType="INTEGER" />
+    <result column="score4" property="score4" jdbcType="INTEGER" />
+    <result column="score3" property="score3" jdbcType="INTEGER" />
+    <result column="score2" property="score2" jdbcType="INTEGER" />
+    <result column="score1" property="score1" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ssy.entity.NoteEntityWithBLOBs" extends="BaseResultMap" >
+    <result column="notecontent" property="notecontent" jdbcType="LONGVARCHAR" />
+    <result column="noteOption" property="noteoption" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    noteid, userid, notename, notetime, isshow, score5, score4, score3, score2, score1
+  </sql>
+  <sql id="Blob_Column_List" >
+    notecontent, noteOption
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from note
+    where noteid = #{noteid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from note
+    where noteid = #{noteid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ssy.entity.NoteEntityWithBLOBs" >
+    insert into note (noteid, userid, notename, 
+      notetime, isshow, score5, 
+      score4, score3, score2, 
+      score1, notecontent, noteOption
+      )
+    values (#{noteid,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{notename,jdbcType=VARCHAR}, 
+      #{notetime,jdbcType=TIMESTAMP}, #{isshow,jdbcType=INTEGER}, #{score5,jdbcType=INTEGER}, 
+      #{score4,jdbcType=INTEGER}, #{score3,jdbcType=INTEGER}, #{score2,jdbcType=INTEGER}, 
+      #{score1,jdbcType=INTEGER}, #{notecontent,jdbcType=LONGVARCHAR}, #{noteoption,jdbcType=VARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssy.entity.NoteEntityWithBLOBs" >
+    insert into note
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noteid != null" >
+        noteid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="notename != null" >
+        notename,
+      </if>
+      <if test="notetime != null" >
+        notetime,
+      </if>
+      <if test="isshow != null" >
+        isshow,
+      </if>
+      <if test="score5 != null" >
+        score5,
+      </if>
+      <if test="score4 != null" >
+        score4,
+      </if>
+      <if test="score3 != null" >
+        score3,
+      </if>
+      <if test="score2 != null" >
+        score2,
+      </if>
+      <if test="score1 != null" >
+        score1,
+      </if>
+      <if test="notecontent != null" >
+        notecontent,
+      </if>
+      <if test="noteoption != null" >
+        noteOption,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noteid != null" >
+        #{noteid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="notename != null" >
+        #{notename,jdbcType=VARCHAR},
+      </if>
+      <if test="notetime != null" >
+        #{notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isshow != null" >
+        #{isshow,jdbcType=INTEGER},
+      </if>
+      <if test="score5 != null" >
+        #{score5,jdbcType=INTEGER},
+      </if>
+      <if test="score4 != null" >
+        #{score4,jdbcType=INTEGER},
+      </if>
+      <if test="score3 != null" >
+        #{score3,jdbcType=INTEGER},
+      </if>
+      <if test="score2 != null" >
+        #{score2,jdbcType=INTEGER},
+      </if>
+      <if test="score1 != null" >
+        #{score1,jdbcType=INTEGER},
+      </if>
+      <if test="notecontent != null" >
+        #{notecontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noteoption != null" >
+        #{noteoption,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssy.entity.NoteEntityWithBLOBs" >
+    update note
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="notename != null" >
+        notename = #{notename,jdbcType=VARCHAR},
+      </if>
+      <if test="notetime != null" >
+        notetime = #{notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isshow != null" >
+        isshow = #{isshow,jdbcType=INTEGER},
+      </if>
+      <if test="score5 != null" >
+        score5 = #{score5,jdbcType=INTEGER},
+      </if>
+      <if test="score4 != null" >
+        score4 = #{score4,jdbcType=INTEGER},
+      </if>
+      <if test="score3 != null" >
+        score3 = #{score3,jdbcType=INTEGER},
+      </if>
+      <if test="score2 != null" >
+        score2 = #{score2,jdbcType=INTEGER},
+      </if>
+      <if test="score1 != null" >
+        score1 = #{score1,jdbcType=INTEGER},
+      </if>
+      <if test="notecontent != null" >
+        notecontent = #{notecontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noteoption != null" >
+        noteOption = #{noteoption,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where noteid = #{noteid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ssy.entity.NoteEntityWithBLOBs" >
+    update note
+    set userid = #{userid,jdbcType=VARCHAR},
+      notename = #{notename,jdbcType=VARCHAR},
+      notetime = #{notetime,jdbcType=TIMESTAMP},
+      isshow = #{isshow,jdbcType=INTEGER},
+      score5 = #{score5,jdbcType=INTEGER},
+      score4 = #{score4,jdbcType=INTEGER},
+      score3 = #{score3,jdbcType=INTEGER},
+      score2 = #{score2,jdbcType=INTEGER},
+      score1 = #{score1,jdbcType=INTEGER},
+      notecontent = #{notecontent,jdbcType=LONGVARCHAR},
+      noteOption = #{noteoption,jdbcType=VARBINARY}
+    where noteid = #{noteid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssy.entity.NoteEntity" >
+    update note
+    set userid = #{userid,jdbcType=VARCHAR},
+      notename = #{notename,jdbcType=VARCHAR},
+      notetime = #{notetime,jdbcType=TIMESTAMP},
+      isshow = #{isshow,jdbcType=INTEGER},
+      score5 = #{score5,jdbcType=INTEGER},
+      score4 = #{score4,jdbcType=INTEGER},
+      score3 = #{score3,jdbcType=INTEGER},
+      score2 = #{score2,jdbcType=INTEGER},
+      score1 = #{score1,jdbcType=INTEGER}
+    where noteid = #{noteid,jdbcType=INTEGER}
+  </update>
+</mapper>

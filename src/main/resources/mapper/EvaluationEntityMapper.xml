@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssy.dao.EvaluationEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.ssy.entity.EvaluationEntity" >
+    <id column="evaluationid" property="evaluationid" jdbcType="INTEGER" />
+    <result column="iscourseornote" property="iscourseornote" jdbcType="INTEGER" />
+    <result column="courseornoteId" property="courseornoteid" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="evaluationcontent" property="evaluationcontent" jdbcType="VARCHAR" />
+    <result column="evaluationtime" property="evaluationtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    evaluationid, iscourseornote, courseornoteId, userid, evaluationcontent, evaluationtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from evaluation
+    where evaluationid = #{evaluationid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from evaluation
+    where evaluationid = #{evaluationid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ssy.entity.EvaluationEntity" >
+    insert into evaluation (evaluationid, iscourseornote, courseornoteId, 
+      userid, evaluationcontent, evaluationtime
+      )
+    values (#{evaluationid,jdbcType=INTEGER}, #{iscourseornote,jdbcType=INTEGER}, #{courseornoteid,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{evaluationcontent,jdbcType=VARCHAR}, #{evaluationtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssy.entity.EvaluationEntity" >
+    insert into evaluation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="evaluationid != null" >
+        evaluationid,
+      </if>
+      <if test="iscourseornote != null" >
+        iscourseornote,
+      </if>
+      <if test="courseornoteid != null" >
+        courseornoteId,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="evaluationcontent != null" >
+        evaluationcontent,
+      </if>
+      <if test="evaluationtime != null" >
+        evaluationtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="evaluationid != null" >
+        #{evaluationid,jdbcType=INTEGER},
+      </if>
+      <if test="iscourseornote != null" >
+        #{iscourseornote,jdbcType=INTEGER},
+      </if>
+      <if test="courseornoteid != null" >
+        #{courseornoteid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationcontent != null" >
+        #{evaluationcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationtime != null" >
+        #{evaluationtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssy.entity.EvaluationEntity" >
+    update evaluation
+    <set >
+      <if test="iscourseornote != null" >
+        iscourseornote = #{iscourseornote,jdbcType=INTEGER},
+      </if>
+      <if test="courseornoteid != null" >
+        courseornoteId = #{courseornoteid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationcontent != null" >
+        evaluationcontent = #{evaluationcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationtime != null" >
+        evaluationtime = #{evaluationtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where evaluationid = #{evaluationid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssy.entity.EvaluationEntity" >
+    update evaluation
+    set iscourseornote = #{iscourseornote,jdbcType=INTEGER},
+      courseornoteId = #{courseornoteid,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      evaluationcontent = #{evaluationcontent,jdbcType=VARCHAR},
+      evaluationtime = #{evaluationtime,jdbcType=TIMESTAMP}
+    where evaluationid = #{evaluationid,jdbcType=INTEGER}
+  </update>
+</mapper>
