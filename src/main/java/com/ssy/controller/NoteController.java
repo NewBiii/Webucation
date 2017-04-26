@@ -1,63 +1,49 @@
 package com.ssy.controller;
 
 import com.ssy.consts.Consts;
-import com.ssy.entity.NoteEntityWithBLOBs;
+import com.ssy.entity.*;
+import com.ssy.service.ICollectionService;
 import com.ssy.service.INoteService;
+import com.ssy.service.IUserService;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.util.Date;
+import java.util.*;
 
 /**
- * Created by NewBee on 2017/4/6.
+ * @Author: NewBiii
+ * @Date: 2017/4/6
  */
 @Controller
+@Scope("prototype")
 @RequestMapping("/note")
 public class NoteController {
 
     @Resource
     private INoteService noteService;
+    @Resource
+    private IUserService userService;
+    @Resource
+    private ICollectionService collectionService;
 
-    @RequestMapping(value = "/edit",method = RequestMethod.POST)
-    public ModelAndView noteSubmit(NoteEntityWithBLOBs note, HttpSession session, ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "file", required = false) MultipartFile file,ModelMap model) throws Exception
-    {
+    @RequestMapping(value = "/create", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView noteSubmit(NoteEntity note, HttpSession session) throws Exception {
 
+        UserEntity user = (UserEntity) session.getAttribute("user");
 
-
-
-        String path = request.getSession().getServletContext().getRealPath("upload");
-        String fileName = file.getOriginalFilename();
-        System.out.println(path);
-        File targetFile = new File(path, fileName);
-        if(!targetFile.exists()){
-            targetFile.mkdirs();
-        }
-
-        //保存
-        try {
-            file.transferTo(targetFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        model.addAttribute("fileUrl", request.getContextPath()+"/upload/"+fileName);
+        note.setUserid(user.getUserid());
 
 
-        note.setUserid((String)session.getAttribute("userid"));
-
-
-        Date date=new Date();
+        Date date = new Date();
         note.setNotetime(date);
 
+        note.setIsshow(0);
+        note.setTypee(0);
 
         note.setScore1(0);
         note.setScore2(0);
@@ -69,60 +55,121 @@ public class NoteController {
 
         ModelAndView mov = new ModelAndView();
 
-        if (iResult == Consts.RESULT_SUCCESS)
-        {
-            mov.addObject(Consts.OPERATION_MESSAGE,"提交成功。");
-        }
-        else if (iResult == Consts.RESULT_NOT_UNIQUE)
-        {
-            mov.addObject(Consts.OPERATION_MESSAGE,"笔记ID被占用。");
-        }
-        else
-        {
-            mov.addObject(Consts.OPERATION_MESSAGE,"提交失败。");
+        if (iResult == 1) {
+            mov.addObject(Consts.OPERATION_MESSAGE, "提交成功。");
+        } else {
+            mov.addObject(Consts.OPERATION_MESSAGE, "提交失败。");
         }
 
-        mov.setViewName(modelAndView.getViewName());
+        mov.setViewName("/views/test.jsp");
 
         return mov;
     }
-   /* @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public void noteSubmit(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request, ModelMap model) throws Exception
-    {
 
-        String path = request.getSession().getServletContext().getRealPath("/images");
+    @RequestMapping(value = "/upload", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView upload(NoteEntity note2, HttpSession session) throws Exception {
 
-        File file1 = new File(path);
-        if (!file1.exists())
-            file1.mkdirs();
-        String fileName = "";// 文件名称
+        ModelAndView mov = new ModelAndView();
+
+        NoteEntity note = (NoteEntity) session.getAttribute("note");
+
+        note.setNotename(note2.getNotename());
+        note.setNotecontent(note2.getNotecontent());
+
+        int result = noteService.updateNote(note);
+
+        System.out.println(result);
 
 
-        *//**上传文件处理内容**//*
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        ServletFileUpload sfu = new ServletFileUpload(factory);
-        sfu.setHeaderEncoding("UTF-8"); // 处理中文问题
-        sfu.setSizeMax(1024 * 1024); // 限制文件大小
-        try {
-            List fileItems = sfu.parseRequest(request); // 解码请求
-
-            *//*for (FileItem fi: fileItems) {
-                fileName = UUID.randomUUID()+fi.getName().substring(fi.getName().lastIndexOf("."),fi.getName().length());
-                fi.write(new File(path, fileName));
-            }*//*
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        *//**********************//*
-
-        //获取图片url地址
-        *//*String imgUrl = "http://localhost:8080/wang_editor_demo/image/" + fileName;
-        response.setContentType("text/text;charset=utf-8");
-        PrintWriter out = response.getWriter();
-        out.print(imgUrl);  //返回url地址
-        out.flush();
-        out.close();*//*
+        mov.setViewName("/views/test.jsp");
+        return mov;
     }
-*/
+
+    @RequestMapping(value = "/edit", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView edit(NoteEntity note, HttpSession session) throws Exception {
+
+        ModelAndView mov = new ModelAndView();
+
+        NoteEntity note2 = noteService.getNoteById(note.getNoteid());
+
+        mov.addObject("note", note2);
+        mov.addObject("notename", note2.getNotename());
+        mov.addObject("notecontent", note2.getNotecontent());
+
+        session.setAttribute("note", note2);
+
+        mov.setViewName("/views/noteEdit.jsp");
+        return mov;
+    }
+
+    @RequestMapping(value = "/noteShow", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView noteShow(NoteEntity note, HttpSession session) throws Exception {
+
+        ModelAndView mov = new ModelAndView();
+        boolean isColl = false;
+
+        NoteEntity note2 = noteService.getNoteById(note.getNoteid());
+
+        if (session.getAttribute("user") != null) {
+            List<CollectionEntity> collEntity = collectionService.getCollByUser(((UserEntity) session.getAttribute("user")).getUserid());
+
+            for (CollectionEntity coll : collEntity) {
+
+                if (Objects.equals(coll.getCourseornoteid(), note2.getNoteid())) {
+
+                    isColl = true;
+                }
+            }
+
+            mov.addObject("iscoll", isColl);
+        }
+        UserEntity user = userService.getUserById(note2.getUserid());
+
+        mov.addObject("note", note2);
+        mov.addObject("auther", user);
+        mov.addObject("notename", note2.getNotename());
+        mov.addObject("notecontent", note2.getNotecontent());
+
+        session.setAttribute("note", note2);
+
+        mov.setViewName("/views/noteShow.jsp");
+        return mov;
+    }
+
+    @RequestMapping(value = "/mynote", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView mynote(UserEntity user, HttpSession session) throws Exception {
+        ModelAndView mov = new ModelAndView();
+
+        List<NoteEntity> noteEntity = new ArrayList<NoteEntity>();
+
+        noteEntity = noteService.getNoteByUser(user.getUserid());
+
+        int size = noteEntity.size();
+
+        mov.addObject("noteNum", size);
+        mov.addObject("noteList", noteEntity);
+
+        mov.setViewName("/views/userNote.jsp");
+        return mov;
+    }
+
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView delete(UserEntity user, NoteEntity note, HttpSession session) throws Exception {
+
+        ModelAndView mov = new ModelAndView();
+
+        noteService.deleteNote(note);
+
+        List<NoteEntity> noteEntity = noteService.getNoteByUser(((UserEntity) session.getAttribute("user")).getUserid());
+
+        int size = noteEntity.size();
+
+        mov.addObject("noteNum", size);
+        mov.addObject("noteList", noteEntity);
+
+        mov.setViewName("/views/userNote.jsp");
+        return mov;
+    }
+
 
 }

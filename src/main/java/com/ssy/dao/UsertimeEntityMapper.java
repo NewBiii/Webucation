@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface UsertimeEntityMapper {
 
-
-
     int deleteByPrimaryKey(Integer logid);
 
     int insert(UsertimeEntity record);
@@ -17,12 +15,12 @@ public interface UsertimeEntityMapper {
 
     UsertimeEntity selectByPrimaryKey(Integer logid);
 
+    UsertimeEntity selectLastLog(@Param("userid") String userid);
 
     List<UsertimeEntity> selectByUserid(@Param("userid") String userid);
-
-
 
     int updateByPrimaryKeySelective(UsertimeEntity record);
 
     int updateByPrimaryKey(UsertimeEntity record);
+
 }

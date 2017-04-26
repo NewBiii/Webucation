@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssy.dao.CollectionEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.ssy.entity.CollectionEntity" >
+    <id column="collectionid" property="collectionid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="iscourseornote" property="iscourseornote" jdbcType="INTEGER" />
+    <result column="courseornoteId" property="courseornoteid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    collectionid, userid, iscourseornote, courseornoteId
+  </sql>
+  <select id="getAllCollForNote" resultMap="BaseResultMap" parameterType="com.ssy.entity.CollectionEntity" >
+    select
+    <include refid="Base_Column_List" />
+    from collection
+    <where>
+      userid = #{userid,jdbcType=VARCHAR} AND iscourseornote =0
+    </where>
+  </select>
+  <select id="getAllCollForCourse" resultMap="BaseResultMap" parameterType="com.ssy.entity.CollectionEntity" >
+    select
+    <include refid="Base_Column_List" />
+    from collection
+    <where>
+      userid = #{userid,jdbcType=VARCHAR} AND iscourseornote =1
+    </where>
+  </select>
+  <select id="getCollByUser" resultMap="BaseResultMap" parameterType="com.ssy.entity.CollectionEntity" >
+    select
+    <include refid="Base_Column_List" />
+    from collection
+
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from collection
+    where collectionid = #{collectionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByUserAndColl" parameterType="java.lang.Integer" >
+    delete from collection
+    <where>
+      userid = #{userid,jdbcType=VARCHAR} AND courseornoteId = #{courseornoteId,jdbcType=INTEGER}
+    </where>
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from collection
+    where collectionid = #{collectionid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ssy.entity.CollectionEntity" >
+    insert into collection (collectionid, userid, iscourseornote, 
+      courseornoteId)
+    values (#{collectionid,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{iscourseornote,jdbcType=INTEGER}, 
+      #{courseornoteid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssy.entity.CollectionEntity" >
+    insert into collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        collectionid,
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="iscourseornote != null" >
+        iscourseornote,
+      </if>
+      <if test="courseornoteid != null" >
+        courseornoteId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      DEFAULT ,
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="iscourseornote != null" >
+        #{iscourseornote,jdbcType=INTEGER},
+      </if>
+      <if test="courseornoteid != null" >
+        #{courseornoteid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssy.entity.CollectionEntity" >
+    update collection
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="iscourseornote != null" >
+        iscourseornote = #{iscourseornote,jdbcType=INTEGER},
+      </if>
+      <if test="courseornoteid != null" >
+        courseornoteId = #{courseornoteid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where collectionid = #{collectionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssy.entity.CollectionEntity" >
+    update collection
+    set userid = #{userid,jdbcType=VARCHAR},
+      iscourseornote = #{iscourseornote,jdbcType=INTEGER},
+      courseornoteId = #{courseornoteid,jdbcType=INTEGER}
+    where collectionid = #{collectionid,jdbcType=INTEGER}
+  </update>
+</mapper>

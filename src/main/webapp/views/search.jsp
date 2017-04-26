@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: NewBee
@@ -9,6 +12,7 @@
 <html>
 <head>
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
 
     <title>查找结果</title>
 </head>
@@ -27,85 +31,45 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-8 column">
-            <blockquote>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                </p> <small>Someone famous <cite>Source Title</cite></small>
-            </blockquote>
-            <blockquote>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                </p> <small>Someone famous <cite>Source Title</cite></small>
-            </blockquote>
-            <blockquote>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                </p> <small>Someone famous <cite>Source Title</cite></small>
-            </blockquote>
-            <blockquote>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                </p> <small>Someone famous <cite>Source Title</cite></small>
-            </blockquote>
-            <blockquote>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                </p> <small>Someone famous <cite>Source Title</cite></small>
-            </blockquote>
-            <blockquote>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                </p> <small>Someone famous <cite>Source Title</cite></small>
-            </blockquote>
-            <blockquote>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                </p> <small>Someone famous <cite>Source Title</cite></small>
-            </blockquote>
-            <blockquote>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                </p> <small>Someone famous <cite>Source Title</cite></small>
-            </blockquote>
-            <blockquote>
-                <p>
-                   <a href="test.jsp"> Lorem ipsum dolor 地方建设开发环境和it amet, consectetur adipiscing elit. Integer posuere erat a ante.</a>
-                </p>
-                <small>Someone famous <cite>Source Title</cite></small>
-            </blockquote>
-            <blockquote>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                </p> <small>Someone famous <cite>Source Title</cite></small>
-            </blockquote>
-            <ul class="pagination">
-                <li>
-                    <a href="#">上一页</a>
-                </li>
-                <li>
-                    <a href="#">1</a>
-                </li>
-                <li>
-                    <a href="#">2</a>
-                </li>
-                <li>
-                    <a href="#">3</a>
-                </li>
-                <li>
-                    <a href="#">4</a>
-                </li>
-                <li>
-                    <a href="#">5</a>
-                </li>
-                <li>
-                    <a href="#">下一页</a>
-                </li>
-            </ul>
+            <c:forEach items="${noteList}" var="note">
+                <blockquote>
+                    <p>
+                        <a href="/note/noteShow?noteid=${note.noteid}"> ${note.notename}</a>
+                    </p>
+                    <small><fmt:formatDate value="${note.notetime}" type="date" dateStyle="long"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<cite>作者：${note.userid}</cite></small>
+                </blockquote>
+            </c:forEach>
+
+
+
+            <div id="pageDemo"></div>
+
+            <script src="/layui/layui.js"></script>
+            <script>
+                layui.use(['layer', 'laypage', 'element'], function(){
+                    var layer = layui.layer
+                        ,laypage = layui.laypage;
+
+                    //分页
+                    laypage({
+                        cont: 'pageDemo' //分页容器的id
+                        ,pages: 100 //总页数
+                        ,skin: '#4682b4' //自定义选中色值
+                        //,skip: true //开启跳页
+                        ,jump: function(obj, first){
+                            if(!first){
+                                layer.msg('第'+ obj.curr +'页');
+                            }
+                        }
+                    });
+                });
+            </script>
         </div>
         <div class="col-md-4 column">
             <div class="container">
             <h3>
-广告招商席位
+                广告招商席位
             </h3>
         </div>
     </div>

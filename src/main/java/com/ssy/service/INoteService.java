@@ -1,15 +1,23 @@
 package com.ssy.service;
 
-import com.ssy.entity.NoteEntityWithBLOBs;
+import com.ssy.entity.NoteEntity;
+
+import java.util.List;
 
 /**
- * Created by NewBee on 2017/4/6.
+ * @Author: NewBiii
+ * @Date: 2017/4/6
  */
 
 public interface INoteService {
 
-    public NoteEntityWithBLOBs getNoteById(int noteid) ;
-    public int insertNote(NoteEntityWithBLOBs note);
-    public int deleteNote(NoteEntityWithBLOBs note);
-    public int updateNote(NoteEntityWithBLOBs note);
+    public NoteEntity getNoteById(int noteid) ;
+    public int insertNote(NoteEntity note);
+    public int deleteNote(NoteEntity note);
+    public int updateNote(NoteEntity note);
+    public List<NoteEntity> getAllNote() ;
+    public List<NoteEntity> getNoteByUser(String userid) ;
+    public List<NoteEntity> getNote1ByUser(String userid) ;
+    public List<NoteEntity> getNote2ByUser(String userid) ;
+
 }

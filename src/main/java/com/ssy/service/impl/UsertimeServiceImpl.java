@@ -23,6 +23,13 @@ public class UsertimeServiceImpl implements IUsertimeService{
     }
 
     @Override
+    public UsertimeEntity selectLastLog(String userid) {
+
+        return this.usertimeMapper.selectLastLog(userid);
+    }
+
+
+    @Override
     public List<UsertimeEntity> getUsertimeByUser(String userid) {
         return this.usertimeMapper.selectByUserid(userid);
     }
@@ -30,5 +37,10 @@ public class UsertimeServiceImpl implements IUsertimeService{
     @Override
     public int insertUsertime(UsertimeEntity usertime) {
         return this.usertimeMapper.insertSelective(usertime);
+    }
+
+    @Override
+    public int updateUsertime(UsertimeEntity usertime) {
+        return this.usertimeMapper.updateByPrimaryKeySelective(usertime);
     }
 }

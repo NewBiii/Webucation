@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserEntityMapper {
 	
-	 List<UserEntity> getAllUser(UserEntity record);
+    List<UserEntity> getAllUser();
 	
     int deleteByPrimaryKey(String userid);
 

@@ -8,139 +8,136 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>demo</title>
-    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>测试页</title>
 
-    <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"> </script>
-    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
-    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" src="lang/zh-cn/zh-cn.js"></script>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/cropper/css/cropper.min.css">
+    <link rel="stylesheet" href="/cropper/css/main.css">
+    <link rel="stylesheet" href="/cropper/css/style.css">
 
 </head>
 <body>
 
+<div class="container" id="crop-avatar">
 
-<div class="container">
-    <h1>完整demo</h1>
-    <script id="editor" type="text/plain"   style="width:1024px;height:500px;"></script>
+    <!-- Current avatar -->
+    <div class="avatar-view" title="Change the avatar">
+        <img src="/images/118701ttttt.jpg" alt="Avatar"/>
+    </div>
+
+    <!-- Cropping modal -->
+    <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form class="avatar-form" action="crop.php" enctype="multipart/form-data" method="post">
+                    <div class="modal-header">
+                        <button class="close" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title" id="avatar-modal-label">更换头像</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="avatar-body">
+
+                            <!-- Upload image and data -->
+                            <div class="avatar-upload">
+                                <input class="avatar-src" name="avatar_src" type="hidden"/>
+                                <input class="avatar-data" name="avatar_data" type="hidden"/>
+                                <label for="avatarInput">头像上传</label>
+                                <input class="avatar-input " id="avatarInput" name="avatar_file" type="file" accept="image/*"/>
+                            </div>
+
+                            <!-- Crop and preview -->
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="avatar-wrapper"></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <!--<div class="avatar-preview preview-lg"></div>-->
+                                    <div class="avatar-preview preview-md">
+                                        <label>160*160</label>
+                                    </div>
+                                    <div class="avatar-preview preview-sm" title="50*50">
+                                        <label>50*50</label>
+                                    </div>
+                                    <div class="avatar-preview preview-xs">
+                                        <label>30*30</label>
+                                    </div>
+                                   <%-- <div class="input-group input-group-sm">
+                                        <label class="input-group-addon" for="dataX">X</label>
+                                        <input type="text" class="form-control" id="dataX" name="x" placeholder="x" >
+                                        <span class="input-group-addon">px</span>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <label class="input-group-addon" for="dataY">Y</label>
+                                        <input type="text" class="form-control" id="dataY" name="y" placeholder="y">
+                                        <span class="input-group-addon">px</span>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <label class="input-group-addon" for="dataWidth">Width</label>
+                                        <input type="text" class="form-control" id="dataWidth" name="width" placeholder="width">
+                                        <span class="input-group-addon">px</span>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <label class="input-group-addon" for="dataHeight">Height</label>
+                                        <input type="text" class="form-control" id="dataHeight" name="height" placeholder="height">
+                                        <span class="input-group-addon">px</span>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <label class="input-group-addon" for="dataRotate">Rotate</label>
+                                        <input type="text" class="form-control" id="dataRotate" placeholder="rotate">
+                                        <span class="input-group-addon">deg</span>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <label class="input-group-addon" for="dataScaleX">ScaleX</label>
+                                        <input type="text" class="form-control" id="dataScaleX" placeholder="scaleX">
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <label class="input-group-addon" for="dataScaleY">ScaleY</label>
+                                        <input type="text" class="form-control" id="dataScaleY" placeholder="scaleY">
+                                    </div>--%>
+                                </div>
+                            </div>
+
+                            <div class="row avatar-btns">
+                                <div class="col-md-9">
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees">向左旋转</button>
+                                        <button class="btn btn-primary" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees">向右旋转</button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary" data-method="rotate" data-option="-15" type="button">-15deg</button>
+                                        <button class="btn btn-primary" data-method="rotate" data-option="15" type="button">15deg</button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary" data-method="rotate" data-option="-30" type="button">-30deg</button>
+                                        <button class="btn btn-primary" data-method="rotate" data-option="30" type="button">30deg</button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary" data-method="rotate" data-option="-45" type="button">-45deg</button>
+                                        <button class="btn btn-primary" data-method="rotate" data-option="45" type="button">45deg</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary btn-block avatar-save" type="submit">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+                      <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+    </div><!-- /.modal -->
+
+    <!-- Loading state -->
+    <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
 </div>
 
-<script type="text/javascript">
-
-    //实例化编辑器
-    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-    var ue = UE.getEditor('editor');
-
-
-    function isFocus(e){
-        alert(UE.getEditor('editor').isFocus());
-        UE.dom.domUtils.preventDefault(e)
-    }
-    function setblur(e){
-        UE.getEditor('editor').blur();
-        UE.dom.domUtils.preventDefault(e)
-    }
-    function insertHtml() {
-        var value = prompt('插入html代码', '');
-        UE.getEditor('editor').execCommand('insertHtml', value)
-    }
-    function createEditor() {
-        enableBtn();
-        UE.getEditor('editor');
-    }
-    function getAllHtml() {
-        alert(UE.getEditor('editor').getAllHtml())
-    }
-    function getContent() {
-        var arr = [];
-        arr.push("使用editor.getContent()方法可以获得编辑器的内容");
-        arr.push("内容为：");
-        arr.push(UE.getEditor('editor').getContent());
-        alert(arr.join("\n"));
-    }
-    function getPlainTxt() {
-        var arr = [];
-        arr.push("使用editor.getPlainTxt()方法可以获得编辑器的带格式的纯文本内容");
-        arr.push("内容为：");
-        arr.push(UE.getEditor('editor').getPlainTxt());
-        alert(arr.join('\n'))
-    }
-    function setContent(isAppendTo) {
-        var arr = [];
-        arr.push("使用editor.setContent('欢迎使用ueditor')方法可以设置编辑器的内容");
-        UE.getEditor('editor').setContent('欢迎使用ueditor', isAppendTo);
-        alert(arr.join("\n"));
-    }
-    function setDisabled() {
-        UE.getEditor('editor').setDisabled('fullscreen');
-        disableBtn("enable");
-    }
-
-    function setEnabled() {
-        UE.getEditor('editor').setEnabled();
-        enableBtn();
-    }
-
-    function getText() {
-        //当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
-        var range = UE.getEditor('editor').selection.getRange();
-        range.select();
-        var txt = UE.getEditor('editor').selection.getText();
-        alert(txt)
-    }
-
-    function getContentTxt() {
-        var arr = [];
-        arr.push("使用editor.getContentTxt()方法可以获得编辑器的纯文本内容");
-        arr.push("编辑器的纯文本内容为：");
-        arr.push(UE.getEditor('editor').getContentTxt());
-        alert(arr.join("\n"));
-    }
-    function hasContent() {
-        var arr = [];
-        arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
-        arr.push("判断结果为：");
-        arr.push(UE.getEditor('editor').hasContents());
-        alert(arr.join("\n"));
-    }
-    function setFocus() {
-        UE.getEditor('editor').focus();
-    }
-    function deleteEditor() {
-        disableBtn();
-        UE.getEditor('editor').destroy();
-    }
-    function disableBtn(str) {
-        var div = document.getElementById('btns');
-        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
-        for (var i = 0, btn; btn = btns[i++];) {
-            if (btn.id == str) {
-                UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
-            } else {
-                btn.setAttribute("disabled", "true");
-            }
-        }
-    }
-    function enableBtn() {
-        var div = document.getElementById('btns');
-        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
-        for (var i = 0, btn; btn = btns[i++];) {
-            UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
-        }
-    }
-
-    function getLocalData () {
-        alert(UE.getEditor('editor').execCommand( "getlocaldata" ));
-    }
-
-    function clearLocalData () {
-        UE.getEditor('editor').execCommand( "clearlocaldata" );
-        alert("已清空草稿箱")
-    }
-</script>
-
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/cropper/js/cropper.min.js"></script>
+<script src="/cropper/js/main.js"></script>
 
 </body>
 </html>

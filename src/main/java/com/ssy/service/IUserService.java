@@ -10,7 +10,7 @@ public interface  IUserService {
 	public int register(UserEntity userEntity) ;
 
 	public UserEntity getUserById(String username) ;
-	public List<UserEntity> getAllUserById(UserEntity record) ;
+	public List<UserEntity> getAllUser() ;
 	public int insertUser(UserEntity user);
 	public int deleteUser(UserEntity user);
 	public int updateUser(UserEntity user);

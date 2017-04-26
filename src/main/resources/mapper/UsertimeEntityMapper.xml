@@ -11,6 +11,14 @@
   <sql id="Base_Column_List" >
     logid, userid, logintime, logouttime, onlinetime
   </sql>
+  <select id="selectLastLog" resultMap="BaseResultMap" parameterType="com.ssy.entity.UsertimeEntity" >
+    select
+    <include refid="Base_Column_List" />
+    from usertime
+    <where>
+      logintime =(select max(logintime) from usertime where userid = #{userid,jdbcType=INTEGER})
+    </where>
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -36,9 +44,9 @@
   <insert id="insertSelective" parameterType="com.ssy.entity.UsertimeEntity" >
     insert into usertime
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="logid != null" >
+
         logid,
-      </if>
+
       <if test="userid != null" >
         userid,
       </if>
@@ -53,9 +61,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="logid != null" >
-        #{logid,jdbcType=INTEGER},
-      </if>
+      DEFAULT ,
       <if test="userid != null" >
         #{userid,jdbcType=VARCHAR},
       </if>

@@ -11,6 +11,8 @@ public class NoteEntity {
 
     private Date notetime;
 
+    private Integer typee;
+
     private Integer isshow;
 
     private Integer score5;
@@ -22,6 +24,8 @@ public class NoteEntity {
     private Integer score2;
 
     private Integer score1;
+
+    private String notecontent;
 
     public Integer getNoteid() {
         return noteid;
@@ -53,6 +57,14 @@ public class NoteEntity {
 
     public void setNotetime(Date notetime) {
         this.notetime = notetime;
+    }
+
+    public Integer getTypee() {
+        return typee;
+    }
+
+    public void setTypee(Integer typee) {
+        this.typee = typee;
     }
 
     public Integer getIsshow() {
@@ -101,5 +113,13 @@ public class NoteEntity {
 
     public void setScore1(Integer score1) {
         this.score1 = score1;
+    }
+
+    public String getNotecontent() {
+        return notecontent;
+    }
+
+    public void setNotecontent(String notecontent) {
+        this.notecontent = notecontent == null ? null : notecontent.trim();
     }
 }

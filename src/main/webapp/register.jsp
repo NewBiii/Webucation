@@ -15,7 +15,7 @@
     <!-- 引入 Bootstrap -->
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-datetimepicker.min.css">
-    <link href="less/build_standalone.less">
+    <link href="layui/css/layui.css">
 
 </head>
 
@@ -43,7 +43,7 @@
 
             <form action="/user/register" method="post" class="form-horizontal" role="form">
                 <div class="form-group">
-                    <label for="username" class="col-sm-2 control-label">昵称</label>
+                    <label for="username" class="col-sm-2 control-label"><font color="#FF0000">*</font>昵称</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="username" name="username"/>
                     </div>
@@ -73,6 +73,14 @@
                             <label><input type="checkbox" name="check1"/>保密</label>
                             <label><input type="checkbox" />男</label>
                             <label><input type="checkbox" />女</label>
+                        </div>
+                        <div class="layui-form-item" pane="">
+                            <label class="layui-form-label">单选框</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="sex" value="男" title="男" checked="">
+                                <input type="radio" name="sex" value="女" title="女">
+                                <input type="radio" name="sex" value="禁" title="禁用" disabled="">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,7 +113,7 @@
                
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">注册</button>
+                        <button type="submit" class="btn btn-primary">注册</button>
                         <a href="login.jsp"><submit class="btn btn-default">返回登录</submit></a>
                     </div>
                 </div>
@@ -115,13 +123,8 @@
     </div>
     </div>
 </div>
-<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js"></script>
-<script type="text/javascript">
-    $(".form_datetime").datetimepicker({
-        format: "yyyy MM dd"
-    });
-</script>
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="layui/layui.js" charset="utf-8"></script>
 </body>
 </html>
 

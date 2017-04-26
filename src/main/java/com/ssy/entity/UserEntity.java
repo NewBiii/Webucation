@@ -9,6 +9,10 @@ public class UserEntity {
 
     private String userpassword;
 
+    private Integer role;
+
+    private String userpicture;
+
     private String userintroduce;
 
     private Integer sex;
@@ -41,6 +45,22 @@ public class UserEntity {
 
     public void setUserpassword(String userpassword) {
         this.userpassword = userpassword == null ? null : userpassword.trim();
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
+    public String getUserpicture() {
+        return userpicture;
+    }
+
+    public void setUserpicture(String userpicture) {
+        this.userpicture = userpicture == null ? null : userpicture.trim();
     }
 
     public String getUserintroduce() {

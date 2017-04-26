@@ -10,11 +10,20 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://cdn.bootcss.com/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="http://cdn.bootcss.com/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"/>
     <style>
-        .comment {font-size: 40px;color:steelblue;}
-        .comment li {float: left;}
-        ul {list-style: none;}
+        .comment {
+            font-size: 40px;
+            color: #4682b4;
+        }
+
+        .comment li {
+            float: left;
+        }
+
+        ul {
+            list-style: none;
+        }
     </style>
     <%--<style>
         body,div,ul,li,p{margin:0;padding:0;}
@@ -84,7 +93,7 @@
             }
         };
     </script>--%>
-    <script language="JavaScript">
+    <%--<script language="JavaScript">
 
         function doEvainsert() {
             var oStar = document.getElementById("star");
@@ -107,47 +116,47 @@
             login.submit();*/
         }
 
-    </script>
+    </script>--%>
 </head>
 <body>
-<div class="container">
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <a id="modal-423533" href="#modal-container-423533" role="button" class="btn btn-primary"
+           data-toggle="modal">评价</a>
 
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <a id="modal-423533" href="#modal-container-423533" role="button" class="btn" data-toggle="modal">给出评价</a>
-
-            <div class="modal fade" id="modal-container-423533" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title" id="myModalLabel">
-                                觉得这篇笔记对你有帮助么
-                            </h4>
+        <div class="modal fade" id="modal-container-423533" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true" align="left">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            觉得这篇笔记对你有帮助么
+                        </h4>
+                    </div>
+                    <div class="modal-header" id="star">
+                        <label for="exampleInputEmail1">评分</label>
+                        <ul class="comment">
+                            <li>☆</li>
+                            <li>☆</li>
+                            <li>☆</li>
+                            <li>☆</li>
+                            <li>☆</li>
+                        </ul>
+                    </div>
+                    <div class="modal-body">
+                        <label for="exampleInputEmail1">评价</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1"/>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" onclick="doEvainsert()">保存</button>
                         </div>
-                        <div class="modal-header" id="star">
-                            <label for="exampleInputEmail1">评分</label>
-                            <ul class="comment">
-                                <li>☆</li>
-                                <li>☆</li>
-                                <li>☆</li>
-                                <li>☆</li>
-                                <li>☆</li>
-                            </ul>
-                        </div>
-                        <div class="modal-body">
-                            <label for="exampleInputEmail1">评价</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" />
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="button" class="btn btn-primary" onclick="doEvainsert()">保存</button>
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
 
             </div>
+
         </div>
     </div>
 </div>

@@ -1,20 +1,37 @@
 package com.ssy.dao;
 
 import com.ssy.entity.NoteEntity;
-import com.ssy.entity.NoteEntityWithBLOBs;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface NoteEntityMapper {
+
     int deleteByPrimaryKey(Integer noteid);
 
-    int insert(NoteEntityWithBLOBs record);
+    int insert(NoteEntity record);
 
-    int insertSelective(NoteEntityWithBLOBs record);
+    int insertSelective(NoteEntity record);
 
-    NoteEntityWithBLOBs selectByPrimaryKey(Integer noteid);
+    NoteEntity selectByPrimaryKey(Integer noteid);
 
-    int updateByPrimaryKeySelective(NoteEntityWithBLOBs record);
+    int updateByPrimaryKeySelective(NoteEntity record);
 
-    int updateByPrimaryKeyWithBLOBs(NoteEntityWithBLOBs record);
+    int updateByPrimaryKeyWithBLOBs(NoteEntity record);
 
-    int updateByPrimaryKey(NoteEntity record);
+    List<NoteEntity> getAllNote();
+
+    List<NoteEntity> getNoteByUser(@Param("userid") String userid);
+
+
+    /**
+     * 查找用户编写的笔记
+     * */
+    List<NoteEntity> getNote1ByUser(@Param("userid") String userid);
+
+
+    /**
+     * 查找用户编写的课程
+     * */
+    List<NoteEntity> getNote2ByUser(@Param("userid") String userid);
 }

@@ -5,6 +5,8 @@
     <id column="userid" property="userid" jdbcType="VARCHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="userpassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="INTEGER" />
+    <result column="userpicture" property="userpicture" jdbcType="VARCHAR" />
     <result column="userintroduce" property="userintroduce" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="INTEGER" />
     <result column="useremail" property="useremail" jdbcType="VARCHAR" />
@@ -12,7 +14,8 @@
     <result column="userbirthday" property="userbirthday" jdbcType="DATE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    userid, username, userpassword, userintroduce, sex, useremail, userphoneNum, userbirthday
+    userid, username, userpassword, role, userpicture, userintroduce, sex, useremail, 
+    userphoneNum, userbirthday
   </sql>
   <select id="getAllUser" resultMap="BaseResultMap" parameterType="com.ssy.entity.UserEntity" >
     select 
@@ -20,12 +23,9 @@
     from user
     <where>  
     	1=1
-            <if test="userid!= null">  
-              and  UserID like CONCAT('%','${userid}','%' )
-            </if>   
-	</where>  
+	</where>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ssy.entity.UserEntity" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from user
@@ -37,11 +37,13 @@
   </delete>
   <insert id="insert" parameterType="com.ssy.entity.UserEntity" >
     insert into user (userid, username, userpassword, 
-      userintroduce, sex, useremail, 
-      userphoneNum, userbirthday)
+      role, userpicture, userintroduce, 
+      sex, useremail, userphoneNum, 
+      userbirthday)
     values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, 
-      #{userintroduce,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{useremail,jdbcType=VARCHAR}, 
-      #{userphonenum,jdbcType=INTEGER}, #{userbirthday,jdbcType=DATE})
+      #{role,jdbcType=INTEGER}, #{userpicture,jdbcType=VARCHAR}, #{userintroduce,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{useremail,jdbcType=VARCHAR}, #{userphonenum,jdbcType=INTEGER}, 
+      #{userbirthday,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.ssy.entity.UserEntity" >
     insert into user
@@ -54,6 +56,12 @@
       </if>
       <if test="userpassword != null" >
         userpassword,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="userpicture != null" >
+        userpicture,
       </if>
       <if test="userintroduce != null" >
         userintroduce,
@@ -81,6 +89,12 @@
       <if test="userpassword != null" >
         #{userpassword,jdbcType=VARCHAR},
       </if>
+      <if test="role != null" >
+        #{role,jdbcType=INTEGER},
+      </if>
+      <if test="userpicture != null" >
+        #{userpicture,jdbcType=VARCHAR},
+      </if>
       <if test="userintroduce != null" >
         #{userintroduce,jdbcType=VARCHAR},
       </if>
@@ -107,6 +121,12 @@
       <if test="userpassword != null" >
         userpassword = #{userpassword,jdbcType=VARCHAR},
       </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="userpicture != null" >
+        userpicture = #{userpicture,jdbcType=VARCHAR},
+      </if>
       <if test="userintroduce != null" >
         userintroduce = #{userintroduce,jdbcType=VARCHAR},
       </if>
@@ -129,6 +149,8 @@
     update user
     set username = #{username,jdbcType=VARCHAR},
       userpassword = #{userpassword,jdbcType=VARCHAR},
+      role = #{role,jdbcType=INTEGER},
+      userpicture = #{userpicture,jdbcType=VARCHAR},
       userintroduce = #{userintroduce,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=INTEGER},
       useremail = #{useremail,jdbcType=VARCHAR},

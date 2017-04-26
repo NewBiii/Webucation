@@ -3,6 +3,7 @@ package com.ssy.dao;
 import com.ssy.entity.EvaluationEntity;
 
 public interface EvaluationEntityMapper {
+
     int deleteByPrimaryKey(Integer evaluationid);
 
     int insert(EvaluationEntity record);

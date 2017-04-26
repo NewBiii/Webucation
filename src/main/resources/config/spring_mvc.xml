@@ -46,7 +46,7 @@
 	<bean
 			class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/" />
-		<property name="suffix" value=".jsp" />
+		<property name="suffix" value="" />
 		<property name="viewClass"
 				  value="org.springframework.web.servlet.view.JstlView" />
 	</bean>
@@ -56,7 +56,7 @@
 		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
 		<property name="defaultEncoding" value="utf-8"/>
 		<!-- 最大内存大小 -->
-		<property name="maxInMemorySize" value="10240"/>
+		<property name="maxInMemorySize" value="-1"/>
 		<!-- 最大文件大小，-1为不限制大小 -->
 		<property name="maxUploadSize" value="-1"/>
 	</bean>
@@ -65,7 +65,9 @@
 	<mvc:resources mapping="/images/**" location="/images/" cache-period="31556926" />
 	<mvc:resources mapping="/dist/**" location="/dist/" cache-period="31556926" />
 	<mvc:resources mapping="/layui/**" location="/layui/" cache-period="31556926" />
-	<!--<mvc:resources mapping="/upload/**" location="/upload/"
-				   cache-period="31556926" />-->
+	<mvc:resources mapping="/croppic/**" location="/croppic/" cache-period="31556926" />
+	<mvc:resources mapping="/cropper/**" location="/cropper/" cache-period="31556926" />
+	<!--<mvc:resources mapping="/upload/**" location="/upload/"	cache-period="31556926" />-->
+
 
 </beans>

@@ -61,8 +61,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<UserEntity> getAllUserById(UserEntity record)  {  
-        return this.userMapper.getAllUser(record);  
+    public List<UserEntity> getAllUser()  {
+        return this.userMapper.getAllUser();
     }
 
     

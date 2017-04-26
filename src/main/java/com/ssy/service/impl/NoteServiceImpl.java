@@ -1,14 +1,16 @@
 package com.ssy.service.impl;
 
 import com.ssy.dao.NoteEntityMapper;
-import com.ssy.entity.NoteEntityWithBLOBs;
+import com.ssy.entity.NoteEntity;
 import com.ssy.service.INoteService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
- * Created by NewBee on 2017/4/6.
+ * @Author: NewBiii
+ * @Date: 2017/4/6
  */
 @Service("noteService")
 public class NoteServiceImpl implements INoteService{
@@ -17,25 +19,45 @@ public class NoteServiceImpl implements INoteService{
     private NoteEntityMapper noteMapper;
 
     @Override
-    public NoteEntityWithBLOBs getNoteById(int noteid)  {
+    public NoteEntity getNoteById(int noteid)  {
         return this.noteMapper.selectByPrimaryKey(noteid);
     }
 
     @Override
-    public int insertNote(NoteEntityWithBLOBs note)  {
+    public int insertNote(NoteEntity note)  {
         return this.noteMapper.insert(note);
     }
 
 
     @Override
-    public int deleteNote(NoteEntityWithBLOBs note){
+    public int deleteNote(NoteEntity note){
         return this.noteMapper.deleteByPrimaryKey(note.getNoteid());
     }
 
     @Override
-    public int updateNote(NoteEntityWithBLOBs note)
+    public int updateNote(NoteEntity note)
     {
-        return this.noteMapper.updateByPrimaryKey(note);
+        return this.noteMapper.updateByPrimaryKeySelective(note);
+    }
+
+    @Override
+    public List<NoteEntity> getAllNote() {
+        return this.noteMapper.getAllNote();
+    }
+
+    @Override
+    public List<NoteEntity> getNoteByUser(String userid) {
+        return this.noteMapper.getNoteByUser(userid);
+    }
+
+    @Override
+    public List<NoteEntity> getNote1ByUser(String userid) {
+        return this.noteMapper.getNote1ByUser(userid);
+    }
+
+    @Override
+    public List<NoteEntity> getNote2ByUser(String userid) {
+        return this.noteMapper.getNote2ByUser(userid);
     }
 
 
