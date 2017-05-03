@@ -7,7 +7,7 @@ public class EvaluationEntity {
 
     private Integer iscourseornote;
 
-    private String courseornoteid;
+    private Integer courseornoteid;
 
     private String userid;
 
@@ -31,12 +31,12 @@ public class EvaluationEntity {
         this.iscourseornote = iscourseornote;
     }
 
-    public String getCourseornoteid() {
+    public Integer getCourseornoteid() {
         return courseornoteid;
     }
 
-    public void setCourseornoteid(String courseornoteid) {
-        this.courseornoteid = courseornoteid == null ? null : courseornoteid.trim();
+    public void setCourseornoteid(Integer courseornoteid) {
+        this.courseornoteid = courseornoteid;
     }
 
     public String getUserid() {

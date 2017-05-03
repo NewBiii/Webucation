@@ -1,8 +1,9 @@
 package com.ssy.controller;
 
-import com.ssy.consts.Consts;
+import com.ssy.tools.Consts;
 import com.ssy.entity.*;
 import com.ssy.service.ICollectionService;
+import com.ssy.service.IMessageService;
 import com.ssy.service.INoteService;
 import com.ssy.service.IUserService;
 import org.springframework.context.annotation.Scope;
@@ -30,6 +31,8 @@ public class NoteController {
     private IUserService userService;
     @Resource
     private ICollectionService collectionService;
+    @Resource
+    private IMessageService messageService;
 
     @RequestMapping(value = "/create", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView noteSubmit(NoteEntity note, HttpSession session) throws Exception {
@@ -125,12 +128,26 @@ public class NoteController {
         }
         UserEntity user = userService.getUserById(note2.getUserid());
 
+        List<MessageEntity> messagelist = new ArrayList<>();
+        messagelist = messageService.selectByNoteId(note2.getNoteid());
+       List<Map<MessageEntity,List<MessageEntity>>> messagedate = new ArrayList<>();
+        Map<MessageEntity,List<MessageEntity>> messageMap = new HashMap<>();
+        for (MessageEntity message : messagelist) {
+
+            List<MessageEntity> revert = new ArrayList<>();
+            revert = messageService.selectByRevertId(message.getMessageid());
+            messageMap.put(message,revert);
+            /*messagedate.add(messageMap);*/
+        }
+
         mov.addObject("note", note2);
         mov.addObject("auther", user);
         mov.addObject("notename", note2.getNotename());
         mov.addObject("notecontent", note2.getNotecontent());
+        mov.addObject("message",messageMap);
 
         session.setAttribute("note", note2);
+        session.setAttribute("allmessage", messageMap);
 
         mov.setViewName("/views/noteShow.jsp");
         return mov;
@@ -142,7 +159,7 @@ public class NoteController {
 
         List<NoteEntity> noteEntity = new ArrayList<NoteEntity>();
 
-        noteEntity = noteService.getNoteByUser(user.getUserid());
+        noteEntity = noteService.getNote1ByUser(user.getUserid());
 
         int size = noteEntity.size();
 
@@ -150,6 +167,23 @@ public class NoteController {
         mov.addObject("noteList", noteEntity);
 
         mov.setViewName("/views/userNote.jsp");
+        return mov;
+    }
+
+    @RequestMapping(value = "/mycourse", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView mycourse(UserEntity user, HttpSession session) throws Exception {
+        ModelAndView mov = new ModelAndView();
+
+        List<NoteEntity> noteEntity = new ArrayList<NoteEntity>();
+
+        noteEntity = noteService.getNote2ByUser(user.getUserid());
+
+        int size = noteEntity.size();
+
+        mov.addObject("courseNum", size);
+        mov.addObject("courseList", noteEntity);
+
+        mov.setViewName("/views/userCourse.jsp");
         return mov;
     }
 

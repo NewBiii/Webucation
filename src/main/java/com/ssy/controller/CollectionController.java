@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: NewBiii
@@ -49,6 +51,52 @@ public class CollectionController {
         mav.setViewName("/views/noteShow.jsp");
         return mav;
     }
+
+    @RequestMapping(value = "/mynotecoll", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView mynotecoll(UserEntity user, HttpSession session) throws Exception {
+        ModelAndView mov = new ModelAndView();
+
+        List<CollectionEntity> collList = collectionService.getAllCollForNote(user.getUserid());
+
+        List<NoteEntity> noteEntity = new ArrayList<>();
+
+        for (CollectionEntity coll:collList) {
+
+            noteEntity.add( noteService.getNoteById(coll.getCourseornoteid()));
+        }
+
+        int size = noteEntity.size();
+
+        mov.addObject("collnoteNum", size);
+        mov.addObject("collnoteList", noteEntity);
+
+        mov.setViewName("/views/userNoteColl.jsp");
+        return mov;
+    }
+
+
+    @RequestMapping(value = "/mycoursecoll", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView mycoursecoll(UserEntity user, HttpSession session) throws Exception {
+        ModelAndView mov = new ModelAndView();
+
+        List<CollectionEntity> collList = collectionService.getAllCollForCourse(user.getUserid());
+
+        List<NoteEntity> noteEntity = new ArrayList<>();
+
+        for (CollectionEntity coll:collList) {
+
+            noteEntity.add( noteService.getNoteById(coll.getCourseornoteid()));
+        }
+
+        int size = noteEntity.size();
+
+        mov.addObject("collcourseNum", size);
+        mov.addObject("collcourseList", noteEntity);
+
+        mov.setViewName("/views/userCourseColl.jsp");
+        return mov;
+    }
+
     @RequestMapping(value = "/delcoll",method = {RequestMethod.POST,RequestMethod.GET})
     public ModelAndView delcoll(NoteEntity note, HttpSession session) throws Exception {
         ModelAndView mav = new ModelAndView();

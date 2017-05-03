@@ -2,9 +2,9 @@ package com.ssy.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.ssy.consts.Consts;
-import com.ssy.consts.ImageCut;
-import com.ssy.consts.Result;
+import com.ssy.tools.Consts;
+import com.ssy.tools.ImageCut;
+import com.ssy.tools.Result;
 import com.ssy.entity.CollectionEntity;
 import com.ssy.entity.NoteEntity;
 import com.ssy.entity.UserEntity;

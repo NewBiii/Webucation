@@ -3,12 +3,15 @@ package com.ssy.service.impl;
 import com.ssy.dao.EvaluationEntityMapper;
 import com.ssy.entity.EvaluationEntity;
 import com.ssy.service.IEvaluationService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 /**
- * Created by NewBee on 2017/4/13.
+ * @Author: NewBiii
+ * @Date: 2017/4/13
  */
+@Service("evalutionService")
 public class EvaluationServiceImpl implements IEvaluationService {
 
     @Resource
@@ -20,7 +23,7 @@ public class EvaluationServiceImpl implements IEvaluationService {
     }
 
     @Override
-    public int insertCourse(EvaluationEntity evaluation) {
+    public int insertEvalution(EvaluationEntity evaluation) {
         return this.evalutionMapper.insertSelective(evaluation);
     }
 

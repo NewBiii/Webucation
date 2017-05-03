@@ -1,4 +1,4 @@
-package com.ssy.consts;
+package com.ssy.tools;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

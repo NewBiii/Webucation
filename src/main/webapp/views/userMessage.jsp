@@ -1,12 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.ssy.entity.UserEntity" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%--
+<%@ page import="com.ssy.entity.UserEntity" %><%--
   Created by IntelliJ IDEA.
-  User: NewBee
-  Date: 2017/4/6
-  Time: 16:14
-  To change this template use File | Settings | File Templates.
+  Author: NewBiii
+  Date: 2017/4/27
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -15,12 +10,12 @@
     <link rel="stylesheet" href="/cropper/css/cropper.min.css">
     <link rel="stylesheet" href="/cropper/css/main.css">
     <link rel="stylesheet" href="/cropper/css/style.css">
-
-    <title>个人信息</title>
+    <title>我的消息</title>
 </head>
 <body>
 <jsp:include page="/views/header.jsp" flush="true"/>
 <br><br><br><br><br>
+
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-2 column">
@@ -31,11 +26,11 @@
 
                         <!-- Current avatar -->
                         <div class="avatar-view" title="Change the avatar" style="width:160px;height:160px;">
-                            <img src="<%=((UserEntity)session.getAttribute("user")).getUserpicture()%>" alt="Avatar"/>
+                            <img src="/images/118701ttttt.jpg" alt="Avatar"/>
                         </div>
 
                         <!-- Cropping modal -->
-                         <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+                        <%-- <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
                              <div class="modal-dialog modal-lg">
                                  <div class="modal-content">
                                      <form class="avatar-form" action="/user/imgCut" enctype="multipart/form-data" method="post">
@@ -70,7 +65,7 @@
                                                          <div class="avatar-preview preview-xs">
                                                              <label>30*30</label>
                                                          </div>
-                                                         <%-- <div class="input-group input-group-sm">
+                                                         &lt;%&ndash; <div class="input-group input-group-sm">
                                                               <label class="input-group-addon" for="dataX">X</label>
                                                               <input type="text" class="form-control" id="dataX" name="x" placeholder="x" >
                                                               <span class="input-group-addon">px</span>
@@ -102,7 +97,7 @@
                                                           <div class="input-group input-group-sm">
                                                               <label class="input-group-addon" for="dataScaleY">ScaleY</label>
                                                               <input type="text" class="form-control" id="dataScaleY" placeholder="scaleY">
-                                                          </div>--%>
+                                                          </div>&ndash;%&gt;
                                                      </div>
                                                  </div>
 
@@ -140,7 +135,7 @@
                          </div><!-- /.modal -->
 
                          <!-- Loading state -->
-                         <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+                         <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>--%>
                     </div>
 
                     <table>
@@ -182,79 +177,47 @@
         </div>
         <div class="col-md-10 column">
             <div class="row clearfix">
-                <div align="center">
-                    <div style="width: 96%;" align="left">
-                        <div class="list-group">
-                            <a class="list-group-item active"><span class="badge">${notesize}</span>最近编写的笔记：</a>
-                            <div class="list-group-item">
-                                <c:forEach items="${note}" var="note" begin="0" end="2" step="1">
-                                    <blockquote>
-                                        <p>
-                                            <a href="/note/noteShow?noteid=${note.noteid}"> ${note.notename}</a>
-                                        </p>
-                                        <small><fmt:formatDate value="${note.notetime}" type="date"
-                                                               dateStyle="long"/></small>
-                                    </blockquote>
-                                </c:forEach>
-                                <c:if test="${notesize>0}">
-                                    <a href="/note/mynote?userid=<%=((UserEntity) session.getAttribute("user")).getUserid()%>">进入我的笔记</a>
-                                </c:if>
+                <div class="list-group">
+                    <a class="list-group-item active"><span class="badge">12</span>新的消息：</a>
+                    <div class="list-group-item">
+                        <div class="media well">
+                            <a href="#" class="pull-left"><img src="/images/tttttttttttttttttt2.jpg" class="media-object img-circle" alt='' style="width: 80px;height: 80px;" /></a>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    某某某
+                                </h4>
+                                为什么要编写这个教程？因为我在学习Git的过程中，买过书，也在网上Google了一堆Git相关的文章和教程，但令人失望的是，这些教程不是难得令人发指，就是简单得一笔带过，或者，只支离破碎地介绍Git的某几个命令，还有直接从Git手册粘贴帮助文档的，总之，初学者很难找到一个由浅入深，学完后能立刻上手的Git教程。
                             </div>
-                            <%if (((UserEntity) session.getAttribute("user")).getRole() == 0) {%>
-                            <a class="list-group-item active"><span class="badge">${coursesize}</span>最近编写的课程：</a>
-                            <div class="list-group-item">
-                                <c:forEach items="${course}" var="course" begin="0" end="2" step="1">
-                                    <blockquote>
-                                        <p>
-                                            <a href="/note/noteShow?noteid=${course.noteid}"> ${course.notename}</a>
-                                        </p>
-                                        <small><fmt:formatDate value="${course.notetime}" type="date"
-                                                               dateStyle="long"/></small>
-                                    </blockquote>
-                                </c:forEach>
-                                <c:if test="${notesize>0}">
-                                    <a href="/note/mycourse?userid=<%=((UserEntity) session.getAttribute("user")).getUserid()%>">进入我的课程</a>
-                                </c:if>
-                            </div>
-                            <%}%>
-                            <a class="list-group-item active"><span class="badge">${collnotesize}</span>最近收藏的笔记：</a>
-                            <div class="list-group-item">
-                                <c:forEach items="${collnote}" var="collnote" begin="0" end="2" step="1">
-                                    <blockquote>
-                                        <p>
-                                            <a href="/note/noteShow?noteid=${collnote.noteid}"> ${collnote.notename}</a>
-                                        </p>
-                                        <small><fmt:formatDate value="${collnote.notetime}" type="date"
-                                                               dateStyle="long"/></small>
-                                    </blockquote>
-                                </c:forEach>
-                                <c:if test="${notesize>0}">
-                                    <a href="/collection/mynotecoll?userid=<%=((UserEntity) session.getAttribute("user")).getUserid()%>">进入笔记收藏</a>
-                                </c:if>
-                            </div>
-                            <a class="list-group-item active"><span class="badge">${collcoursesize}</span>最近收藏的课程：</a>
-                            <div class="list-group-item">
-                                <c:forEach items="${collcourse}" var="collcourse" begin="0" end="2" step="1">
-                                    <blockquote>
-                                        <p>
-                                            <a href="/note/noteShow?noteid=${collcourse.noteid}"> ${collcourse.notename}</a>
-                                        </p>
-                                        <small><fmt:formatDate value="${collcourse.notetime}" type="date"
-                                                               dateStyle="long"/></small>
-                                    </blockquote>
-                                </c:forEach>
-                                <c:if test="${collcoursesize>0}">
-                                    <a href="/collection/mycoursecoll?userid=<%=((UserEntity) session.getAttribute("user")).getUserid()%>">进入课程收藏</a>
-                                </c:if>
-                            </div>
+                        </div>
+                    </div>
+                    <a class="list-group-item active"><span class="badge">12</span>历史消息：</a>
+                    <div class="list-group-item">
 
+                    </div>
+                </div>
+
+                <div class="media well">
+                    <a href="#" class="pull-left"><img src="v3/default7.jpg" class="media-object" alt='' /></a>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            某某某
+                        </h4>为什么要编写这个教程？因为我在学习Git的过程中，买过书，也在网上Google了一堆Git相关的文章和教程，但令人失望的是，这些教程不是难得令人发指，就是简单得一笔带过，或者，只支离破碎地介绍Git的某几个命令，还有直接从Git手册粘贴帮助文档的，总之，初学者很难找到一个由浅入深，学完后能立刻上手的Git教程。
+                        <div class="media">
+                            <a href="#" class="pull-left"><img src="v3/default8.jpg" class="media-object" alt='' /></a>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    Nested media heading
+                                </h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </div>
 </div>
+
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 
 <script src="/cropper/js/cropper.min.js"></script>

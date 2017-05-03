@@ -38,10 +38,10 @@
                             <%=((UserEntity) session.getAttribute("user")).getUsername()%>
                         </div>
                         <div class="panel-footer">
-                            你写的笔记：
+                            你写的课程：
                         </div>
                         <div class="panel-body">
-                            ${noteNum}篇
+                            ${courseNum}篇
                         </div>
                     </div>
                 </div>
@@ -49,17 +49,19 @@
         </div>
         <div class="col-md-10 column">
             <div class="row clearfix">
-                <c:forEach items="${noteList}" var="note">
+                <c:forEach items="${courseList}" var="course">
                     <blockquote>
                         <p>
-                            <a href="/note/noteShow?noteid=${note.noteid}"> ${note.notename}</a>
+                            <a href="/note/noteShow?noteid=${course.noteid}"> ${course.notename}</a>
                         </p>
                         <small>
-                            <fmt:formatDate value="${note.notetime}" type="date" dateStyle="long"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <fmt:formatDate value="${course.notetime}" type="date" dateStyle="long" />&nbsp;&nbsp;&nbsp;&nbsp;
                             <cite>
-                                <a href="/note/edit?noteid=${note.noteid}">编辑</a>
+                                <a href="/note/edit?noteid=${course.noteid}">编辑</a>
                                 &nbsp;&nbsp;
-                                <a href="/note/delete?noteid=${note.noteid}">删除</a>
+                                <a href="/note/delete?noteid=${course.noteid}">删除</a>
+                                &nbsp;&nbsp;
+                                <a href="/note/delete?noteid=${course.noteid}">设为</a>
                             </cite>
                         </small>
                     </blockquote>

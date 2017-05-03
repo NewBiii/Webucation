@@ -18,24 +18,8 @@
 
 <body>
 <jsp:include page="/views/header.jsp" flush="true"/>
-<div>
-    <table>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-    </table>
-</div>
-<div>
-    <table>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-    </table>
-</div>
+<br><br><br><br><br><br><br><br><br><br>
+
 <div class="container">
 
     <div class="row clearfix">
@@ -47,7 +31,7 @@
             <h3 class="text-center">登录网络学习系统</h3>
             <h3 class="text-center"></h3>
 
-            <form action = "/user/login" name="login" method="get" class="form-horizontal" role="form">
+            <form action = "/user/login" name="login" method="post" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">账户</label>
                     <div class="col-sm-10">

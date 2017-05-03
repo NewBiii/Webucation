@@ -11,7 +11,7 @@
 <head>
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" charset="utf-8" href="/dist/css/wangEditor.min.css">
-    <title>我的笔记</title>
+    <title>笔记收藏</title>
 </head>
 <body>
 <jsp:include page="/views/header.jsp" flush="true"/>
@@ -41,7 +41,7 @@
                             你写的笔记：
                         </div>
                         <div class="panel-body">
-                            ${noteNum}篇
+                            ${collcourseNum}篇
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-10 column">
             <div class="row clearfix">
-                <c:forEach items="${noteList}" var="note">
+                <c:forEach items="${collcourseList}" var="note">
                     <blockquote>
                         <p>
                             <a href="/note/noteShow?noteid=${note.noteid}"> ${note.notename}</a>

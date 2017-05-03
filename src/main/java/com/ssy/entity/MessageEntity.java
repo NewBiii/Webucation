@@ -5,13 +5,21 @@ import java.util.Date;
 public class MessageEntity {
     private Integer messageid;
 
-    private Integer iscourseornote;
-
-    private Integer courseornoteid;
-
     private String userid;
 
+    private String username;
+
+    private String userpicture;
+
+    private String touserid;
+
     private Date messagetime;
+
+    private Integer isread;
+
+    private Integer revertid;
+
+    private Integer courseornoteid;
 
     private String messagecontent;
 
@@ -23,22 +31,6 @@ public class MessageEntity {
         this.messageid = messageid;
     }
 
-    public Integer getIscourseornote() {
-        return iscourseornote;
-    }
-
-    public void setIscourseornote(Integer iscourseornote) {
-        this.iscourseornote = iscourseornote;
-    }
-
-    public Integer getCourseornoteid() {
-        return courseornoteid;
-    }
-
-    public void setCourseornoteid(Integer courseornoteid) {
-        this.courseornoteid = courseornoteid;
-    }
-
     public String getUserid() {
         return userid;
     }
@@ -47,12 +39,60 @@ public class MessageEntity {
         this.userid = userid == null ? null : userid.trim();
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
+
+    public String getUserpicture() {
+        return userpicture;
+    }
+
+    public void setUserpicture(String userpicture) {
+        this.userpicture = userpicture == null ? null : userpicture.trim();
+    }
+
+    public String getTouserid() {
+        return touserid;
+    }
+
+    public void setTouserid(String touserid) {
+        this.touserid = touserid == null ? null : touserid.trim();
+    }
+
     public Date getMessagetime() {
         return messagetime;
     }
 
     public void setMessagetime(Date messagetime) {
         this.messagetime = messagetime;
+    }
+
+    public Integer getIsread() {
+        return isread;
+    }
+
+    public void setIsread(Integer isread) {
+        this.isread = isread;
+    }
+
+    public Integer getRevertid() {
+        return revertid;
+    }
+
+    public void setRevertid(Integer revertid) {
+        this.revertid = revertid;
+    }
+
+    public Integer getCourseornoteid() {
+        return courseornoteid;
+    }
+
+    public void setCourseornoteid(Integer courseornoteid) {
+        this.courseornoteid = courseornoteid;
     }
 
     public String getMessagecontent() {

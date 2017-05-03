@@ -2,6 +2,7 @@
 <%@ page import="com.ssy.entity.UserEntity" %>
 <%@ page import="com.ssy.entity.NoteEntity" %>
 <%@ page import="java.util.Objects" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%--
   Created by IntelliJ IDEA.
   Author: NewBiii
@@ -22,7 +23,7 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column" align="right">
-            <%if ( session.getAttribute("user") != null) {%>
+            <%if (session.getAttribute("user") != null) {%>
             <%if (Objects.equals(((UserEntity) session.getAttribute("user")).getUserid(), ((NoteEntity) session.getAttribute("note")).getUserid())) {%>
             <div class="form-group">
                 <a href="/note/edit?noteid=${note.noteid}" class="btn btn-primary">修改</a>
@@ -40,7 +41,10 @@
                     <a href="/collection/delcoll?noteid=${note.noteid}" class="btn btn-default">取消收藏</a>
                 </c:if>
             </div>
-            <%}}%>
+            <%
+                    }
+                }
+            %>
         </div>
     </div>
 </div>
@@ -50,17 +54,17 @@
         <div class="col-md-2 column">
             <div style="background-color: #0C0C0C;">
                 <div style="background-color: #ffffff">
-                    <br> <br> <br> <br>
+                    <br><br>
                 </div>
                 <div style="width: 98%;background-color: #ffffff">
-                    <img style="width:160px;height:160px;" src="/images/118701ttttt.jpg" class="img-circle"/>
+                    <img style="width:160px;height:160px;" src="${auther.userpicture}" class="img-circle"/>
                     <br><br>
                     <div class="panel panel-default" style="width: 98%;">
                         <div class="panel-footer">
                             作者：
                         </div>
                         <div class="panel-body">
-                           ${auther.username}
+                            ${auther.username}
                         </div>
                         <div class="panel-footer">
                             签名：
@@ -73,6 +77,9 @@
                         </div>
                         <div class="panel-body">
                             ${auther.useremail}
+                        </div>
+                        <div class="panel-footer">
+                            <a href="">查看作者</a>
                         </div>
                     </div>
                 </div>
@@ -112,45 +119,88 @@
                             <a href="/note/edit?noteid=${note.noteid}" class="btn btn-primary">修改</a>
                         </div>
                         <%} else {%>
-                        <div class="col-sm-3">
-                            <label>这篇文章有帮助么？给它个评价</label>
-                        </div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-1">
                             <jsp:include page="/views/noteEvaluation.jsp" flush="true"/>
+                        </div>
+                        <div class="col-sm-9">
+                            <label>这篇文章有帮助么?</label>
                         </div>
                         <br><br>
                         <c:if test="${!iscoll}">
-                            <div class="col-sm-3">
-                                <label>或者你可以收藏它</label>
-                            </div>
-                            <div class="col-sm-7">
+                            <div class="col-sm-1">
                                 <a href="/collection/keep?noteid=${note.noteid}&typee=${note.typee}"
                                    class="btn btn-primary">收藏</a>
                             </div>
+                            <div class="col-sm-9">
+                                <label>或者你可以收藏它</label>
+                            </div>
                         </c:if>
                         <c:if test="${iscoll}">
-                            <div class="col-sm-3">
-                                <label>你已收藏该文章</label>
-                            </div>
-                            <div class="col-sm-7">
+                            <div class="col-sm-1">
                                 <a href="/collection/delcoll?noteid=${note.noteid}" class="btn btn-default">取消收藏</a>
+                            </div>
+                            <div class="col-sm-9">
+                                <label>你已收藏该文章</label>
                             </div>
                         </c:if>
                         <%}%>
                     </div>
                 </form>
                 <br><br><br><br>
-                <form action="" name="" method="post" class="form-horizontal" role="form">
+                <label>用户问答Q&A：</label>
+                <c:forEach items="${message}" var="message" begin="0" end="10" step="1">
+                    <div class="media well">
+                        <a href="#" class="pull-left"><img src="${message.key.userpicture}"
+                                                           class="media-object img-circle"
+                                                           alt='' style="width: 80px;height: 80px;"/></a>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                    ${message.key.username}
+                            </h4>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <fmt:formatDate value="${message.key.messagetime}" type="date" dateStyle="long"/>
+
+                            <br><br>
+
+                                ${message.key.messagecontent}
+                            <a href="#">回复</a>
+                            <c:forEach items="${message.value}" var="value">
+                                <div class="media">
+                                    <a href="#" class="pull-left"><img src="${value.userpicture}"
+                                                                       class="media-object img-circle" alt=''
+                                                                       style="width: 80px;height: 80px;"/></a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                                ${value.username}
+                                        </h4>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <fmt:formatDate value="${value.messagetime}" type="date"
+                                                        dateStyle="long"/>
+                                        <br><br>
+                                            ${value.messagecontent}
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </c:forEach>
+                <br><br><br><br>
+                <%if (!Objects.equals(((UserEntity) session.getAttribute("user")).getUserid(), ((NoteEntity) session.getAttribute("note")).getUserid())) {%>
+                <form action="/message/question" name="" method="post" class="form-horizontal" role="form">
                     <div class="form-group">
                         <label for="textarea2">还有疑惑？给他留言吧</label>
-                        <textarea type="input" id="textarea2" style="height:200px" name="massage"></textarea>
+                        <textarea type="input" id="textarea2" style="height:200px" name="messagecontent"></textarea>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">发送</button>
                         <a href="javascript:history.back(-1)" class="btn btn-default">返回</a>
                     </div>
                 </form>
-                <%}else {%>
+                <%
+                    }
+                } else {
+                %>
                 <h4><a href="/login.jsp">登陆</a>之后，体验更多内容。</h4>
                 <br><br><br><br>
                 <%}%>

@@ -1,6 +1,6 @@
 package com.ssy.service.impl;
 
-import com.ssy.consts.Consts;
+import com.ssy.tools.Consts;
 import com.ssy.dao.UserEntityMapper;
 import com.ssy.entity.UserEntity;
 import com.ssy.service.IUserService;

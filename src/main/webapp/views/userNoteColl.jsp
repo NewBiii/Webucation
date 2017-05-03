@@ -41,7 +41,7 @@
                             你写的笔记：
                         </div>
                         <div class="panel-body">
-                            ${noteNum}篇
+                            ${collnoteNum}篇
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-10 column">
             <div class="row clearfix">
-                <c:forEach items="${noteList}" var="note">
+                <c:forEach items="${collnoteList}" var="note">
                     <blockquote>
                         <p>
                             <a href="/note/noteShow?noteid=${note.noteid}"> ${note.notename}</a>

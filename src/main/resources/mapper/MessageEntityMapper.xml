@@ -3,20 +3,59 @@
 <mapper namespace="com.ssy.dao.MessageEntityMapper" >
   <resultMap id="BaseResultMap" type="com.ssy.entity.MessageEntity" >
     <id column="messageid" property="messageid" jdbcType="INTEGER" />
-    <result column="iscourseornote" property="iscourseornote" jdbcType="INTEGER" />
-    <result column="courseornoteid" property="courseornoteid" jdbcType="INTEGER" />
     <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="userpicture" property="userpicture" jdbcType="VARCHAR" />
+    <result column="touserid" property="touserid" jdbcType="VARCHAR" />
     <result column="messagetime" property="messagetime" jdbcType="TIMESTAMP" />
+    <result column="isread" property="isread" jdbcType="INTEGER" />
+    <result column="revertid" property="revertid" jdbcType="INTEGER" />
+    <result column="courseornoteid" property="courseornoteid" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ssy.entity.MessageEntity" extends="BaseResultMap" >
     <result column="messagecontent" property="messagecontent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    messageid, iscourseornote, courseornoteid, userid, messagetime
+    messageid, userid, username, userpicture, touserid, messagetime, isread, revertid, 
+    courseornoteid
   </sql>
   <sql id="Blob_Column_List" >
     messagecontent
   </sql>
+
+  <select id="selectByTouserid" resultMap="ResultMapWithBLOBs" parameterType="com.ssy.entity.MessageEntity" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    <where>
+      touserid = #{touserid,jdbcType=VARCHAR} AND typee=1 ORDER BY messagetime ASC ;
+    </where>
+  </select>
+
+  <select id="selectByNoteId" resultMap="ResultMapWithBLOBs" parameterType="com.ssy.entity.MessageEntity" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    <where>
+      courseornoteid = #{courseornoteid,jdbcType=INTEGER} AND revertid=0 ORDER BY messageid ASC ;
+    </where>
+  </select>
+
+  <select id="selectByRevertId" resultMap="ResultMapWithBLOBs" parameterType="com.ssy.entity.MessageEntity" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    <where>
+      revertid = #{revertid,jdbcType=INTEGER} ORDER BY messageid ASC ;
+    </where>
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -30,50 +69,72 @@
     where messageid = #{messageid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ssy.entity.MessageEntity" >
-    insert into message (messageid, iscourseornote, courseornoteid, 
-      userid, messagetime, messagecontent
-      )
-    values (#{messageid,jdbcType=INTEGER}, #{iscourseornote,jdbcType=INTEGER}, #{courseornoteid,jdbcType=INTEGER}, 
-      #{userid,jdbcType=VARCHAR}, #{messagetime,jdbcType=TIMESTAMP}, #{messagecontent,jdbcType=LONGVARCHAR}
-      )
+    insert into message (messageid, userid, username, 
+      userpicture, touserid, messagetime, 
+      isread, revertid, courseornoteid, 
+      messagecontent)
+    values (#{messageid,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userpicture,jdbcType=VARCHAR}, #{touserid,jdbcType=VARCHAR}, #{messagetime,jdbcType=TIMESTAMP}, 
+      #{isread,jdbcType=INTEGER}, #{revertid,jdbcType=INTEGER}, #{courseornoteid,jdbcType=INTEGER}, 
+      #{messagecontent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ssy.entity.MessageEntity" >
     insert into message
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="messageid != null" >
         messageid,
-      </if>
-      <if test="iscourseornote != null" >
-        iscourseornote,
-      </if>
-      <if test="courseornoteid != null" >
-        courseornoteid,
-      </if>
       <if test="userid != null" >
         userid,
       </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="userpicture != null" >
+        userpicture,
+      </if>
+      <if test="touserid != null" >
+        touserid,
+      </if>
       <if test="messagetime != null" >
         messagetime,
+      </if>
+      <if test="isread != null" >
+        isread,
+      </if>
+      <if test="revertid != null" >
+        revertid,
+      </if>
+      <if test="courseornoteid != null" >
+        courseornoteid,
       </if>
       <if test="messagecontent != null" >
         messagecontent,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="messageid != null" >
-        #{messageid,jdbcType=INTEGER},
-      </if>
-      <if test="iscourseornote != null" >
-        #{iscourseornote,jdbcType=INTEGER},
-      </if>
-      <if test="courseornoteid != null" >
-        #{courseornoteid,jdbcType=INTEGER},
-      </if>
+      DEFAULT ,
       <if test="userid != null" >
         #{userid,jdbcType=VARCHAR},
       </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpicture != null" >
+        #{userpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="touserid != null" >
+        #{touserid,jdbcType=VARCHAR},
+      </if>
       <if test="messagetime != null" >
         #{messagetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isread != null" >
+        #{isread,jdbcType=INTEGER},
+      </if>
+      <if test="revertid != null" >
+        #{revertid,jdbcType=INTEGER},
+      </if>
+      <if test="courseornoteid != null" >
+        #{courseornoteid,jdbcType=INTEGER},
       </if>
       <if test="messagecontent != null" >
         #{messagecontent,jdbcType=LONGVARCHAR},
@@ -83,17 +144,29 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ssy.entity.MessageEntity" >
     update message
     <set >
-      <if test="iscourseornote != null" >
-        iscourseornote = #{iscourseornote,jdbcType=INTEGER},
-      </if>
-      <if test="courseornoteid != null" >
-        courseornoteid = #{courseornoteid,jdbcType=INTEGER},
-      </if>
       <if test="userid != null" >
         userid = #{userid,jdbcType=VARCHAR},
       </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpicture != null" >
+        userpicture = #{userpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="touserid != null" >
+        touserid = #{touserid,jdbcType=VARCHAR},
+      </if>
       <if test="messagetime != null" >
         messagetime = #{messagetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isread != null" >
+        isread = #{isread,jdbcType=INTEGER},
+      </if>
+      <if test="revertid != null" >
+        revertid = #{revertid,jdbcType=INTEGER},
+      </if>
+      <if test="courseornoteid != null" >
+        courseornoteid = #{courseornoteid,jdbcType=INTEGER},
       </if>
       <if test="messagecontent != null" >
         messagecontent = #{messagecontent,jdbcType=LONGVARCHAR},
@@ -103,19 +176,27 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ssy.entity.MessageEntity" >
     update message
-    set iscourseornote = #{iscourseornote,jdbcType=INTEGER},
-      courseornoteid = #{courseornoteid,jdbcType=INTEGER},
-      userid = #{userid,jdbcType=VARCHAR},
+    set userid = #{userid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      userpicture = #{userpicture,jdbcType=VARCHAR},
+      touserid = #{touserid,jdbcType=VARCHAR},
       messagetime = #{messagetime,jdbcType=TIMESTAMP},
+      isread = #{isread,jdbcType=INTEGER},
+      revertid = #{revertid,jdbcType=INTEGER},
+      courseornoteid = #{courseornoteid,jdbcType=INTEGER},
       messagecontent = #{messagecontent,jdbcType=LONGVARCHAR}
     where messageid = #{messageid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ssy.entity.MessageEntity" >
     update message
-    set iscourseornote = #{iscourseornote,jdbcType=INTEGER},
-      courseornoteid = #{courseornoteid,jdbcType=INTEGER},
-      userid = #{userid,jdbcType=VARCHAR},
-      messagetime = #{messagetime,jdbcType=TIMESTAMP}
+    set userid = #{userid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      userpicture = #{userpicture,jdbcType=VARCHAR},
+      touserid = #{touserid,jdbcType=VARCHAR},
+      messagetime = #{messagetime,jdbcType=TIMESTAMP},
+      isread = #{isread,jdbcType=INTEGER},
+      revertid = #{revertid,jdbcType=INTEGER},
+      courseornoteid = #{courseornoteid,jdbcType=INTEGER}
     where messageid = #{messageid,jdbcType=INTEGER}
   </update>
 </mapper>

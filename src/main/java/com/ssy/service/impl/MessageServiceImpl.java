@@ -6,6 +6,7 @@ import com.ssy.service.IMessageService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author: NewBiii
@@ -36,5 +37,20 @@ public class MessageServiceImpl implements IMessageService {
     @Override
     public int updateMessage(MessageEntity message) {
         return this.messageMapper.updateByPrimaryKey(message);
+    }
+
+    @Override
+    public List<MessageEntity> selectByNoteId(int noteid) {
+        return this.messageMapper.selectByNoteId(noteid);
+    }
+
+    @Override
+    public List<MessageEntity> selectByRevertId(int revertid) {
+        return this.messageMapper.selectByRevertId(revertid);
+    }
+
+    @Override
+    public List<MessageEntity> selectByTouserid(int touserid) {
+        return this.messageMapper.selectByTouserid(touserid);
     }
 }

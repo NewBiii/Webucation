@@ -1,4 +1,4 @@
-package com.ssy.consts;
+package com.ssy.tools;
 
 public class Consts
 {
