@@ -26,7 +26,7 @@
         <tr><td>&nbsp;</td></tr>
     </table>
 </div>
-<div class="container">
+<div class="container my-content">
     <div class="row clearfix">
         <div class="col-md-12 column">
             <form action="/note/create" method="post" role="form">

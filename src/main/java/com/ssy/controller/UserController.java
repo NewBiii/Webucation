@@ -57,7 +57,7 @@ public class UserController {
 		UserEntity user2 = userService.login(user.getUserid(), user.getUserpassword());
 		UsertimeEntity usertime = new UsertimeEntity();
 
-		if (user2.getUsername() != null) {
+		if (user2 != null) {
 			usertime.setLogintime(date);
 			usertime.setUserid(user2.getUserid());
 			usertimeService.insertUsertime(usertime);

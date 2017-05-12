@@ -6,6 +6,7 @@ import com.ssy.entity.UserEntity;
 import java.util.List;
 
 public interface  IUserService {
+
 	public UserEntity login(String username, String password) ;
 	public int register(UserEntity userEntity) ;
 

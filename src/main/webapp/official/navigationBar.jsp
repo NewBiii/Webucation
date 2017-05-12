@@ -20,7 +20,7 @@
     <ul class="layui-nav layui-nav-tree layui-nav-side left-nav" lay-filter="test">
         <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
         <li class="layui-nav-item">
-            <a class="hid-btn">收起导航栏</a>
+            <a class="hid-btn">＜＜收起导航栏＜＜</a>
         </li>
         <li class="layui-nav-item">
             <a href="#">Java基础</a>
@@ -82,7 +82,7 @@
     <br>
     <ul class="layui-nav layui-nav-tree layui-my-nav" lay-filter="test" style="position: fixed; top: 51px;z-index: 2;">
         <li class="layui-nav-item">
-            <a class="show-btn">展开导航栏</a>
+            <a class="show-btn">＞＞展开导航栏＞＞</a>
         </li>
     </ul>
 </div>
