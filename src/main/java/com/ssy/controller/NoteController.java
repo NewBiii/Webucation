@@ -64,7 +64,7 @@ public class NoteController {
             mov.addObject(Consts.OPERATION_MESSAGE, "提交失败。");
         }
 
-        mov.setViewName("/views/test.jsp");
+        mov.setViewName("test.jsp");
 
         return mov;
     }
@@ -84,7 +84,7 @@ public class NoteController {
         System.out.println(result);
 
 
-        mov.setViewName("/views/test.jsp");
+        mov.setViewName("test.jsp");
         return mov;
     }
 

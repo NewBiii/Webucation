@@ -21,9 +21,7 @@
 <body>
 <jsp:include page="/views/header.jsp" flush="true"/>
 <br><br><br><br><br>
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-md-2 column">
+
             <div style="background-color: #0C0C0C;">
 
                 <div style="width: 98%;background-color: #ffffff">
@@ -35,112 +33,135 @@
                         </div>
 
                         <!-- Cropping modal -->
-                         <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
-                             <div class="modal-dialog modal-lg">
-                                 <div class="modal-content">
-                                     <form class="avatar-form" action="/user/imgCut" enctype="multipart/form-data" method="post">
-                                         <div class="modal-header">
-                                             <button class="close" data-dismiss="modal" type="button">×</button>
-                                             <h4 class="modal-title" id="avatar-modal-label">更换头像</h4>
-                                         </div>
-                                         <div class="modal-body">
-                                             <div class="avatar-body">
+                        <div class="modal fade" id="avatar-modal" aria-hidden="true"
+                             aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <form class="avatar-form" action="/user/imgCut" enctype="multipart/form-data"
+                                          method="post">
+                                        <div class="modal-header">
+                                            <button class="close" data-dismiss="modal" type="button">×</button>
+                                            <h4 class="modal-title" id="avatar-modal-label">更换头像</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="avatar-body">
 
-                                                 <!-- Upload image and data -->
-                                                 <div class="avatar-upload">
-                                                     <input class="avatar-src" name="avatar_src" type="hidden"/>
-                                                     <input class="avatar-data" name="avatar_data" type="hidden"/>
-                                                     <label for="avatarInput">头像上传</label>
-                                                     <input class="avatar-input " id="avatarInput" name="avatar_file" type="file" accept="image/*"/>
-                                                 </div>
+                                                <!-- Upload image and data -->
+                                                <div class="avatar-upload">
+                                                    <input class="avatar-src" name="avatar_src" type="hidden"/>
+                                                    <input class="avatar-data" name="avatar_data" type="hidden"/>
+                                                    <label for="avatarInput">头像上传</label>
+                                                    <input class="avatar-input " id="avatarInput" name="avatar_file"
+                                                           type="file" accept="image/*"/>
+                                                </div>
 
-                                                 <!-- Crop and preview -->
-                                                 <div class="row">
-                                                     <div class="col-md-9">
-                                                         <div class="avatar-wrapper"></div>
-                                                     </div>
-                                                     <div class="col-md-3">
-                                                         <!--<div class="avatar-preview preview-lg"></div>-->
-                                                         <div class="avatar-preview preview-md">
-                                                             <label>160*160</label>
+                                                <!-- Crop and preview -->
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="avatar-wrapper"></div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <!--<div class="avatar-preview preview-lg"></div>-->
+                                                        <div class="avatar-preview preview-md">
+                                                            <label>160*160</label>
+                                                        </div>
+                                                        <div class="avatar-preview preview-sm" title="50*50">
+                                                            <label>50*50</label>
+                                                        </div>
+                                                        <div class="avatar-preview preview-xs">
+                                                            <label>30*30</label>
+                                                        </div>
+                                                        <%-- <div class="input-group input-group-sm">
+                                                             <label class="input-group-addon" for="dataX">X</label>
+                                                             <input type="text" class="form-control" id="dataX" name="x" placeholder="x" >
+                                                             <span class="input-group-addon">px</span>
                                                          </div>
-                                                         <div class="avatar-preview preview-sm" title="50*50">
-                                                             <label>50*50</label>
+                                                         <div class="input-group input-group-sm">
+                                                             <label class="input-group-addon" for="dataY">Y</label>
+                                                             <input type="text" class="form-control" id="dataY" name="y" placeholder="y">
+                                                             <span class="input-group-addon">px</span>
                                                          </div>
-                                                         <div class="avatar-preview preview-xs">
-                                                             <label>30*30</label>
+                                                         <div class="input-group input-group-sm">
+                                                             <label class="input-group-addon" for="dataWidth">Width</label>
+                                                             <input type="text" class="form-control" id="dataWidth" name="width" placeholder="width">
+                                                             <span class="input-group-addon">px</span>
                                                          </div>
-                                                         <%-- <div class="input-group input-group-sm">
-                                                              <label class="input-group-addon" for="dataX">X</label>
-                                                              <input type="text" class="form-control" id="dataX" name="x" placeholder="x" >
-                                                              <span class="input-group-addon">px</span>
-                                                          </div>
-                                                          <div class="input-group input-group-sm">
-                                                              <label class="input-group-addon" for="dataY">Y</label>
-                                                              <input type="text" class="form-control" id="dataY" name="y" placeholder="y">
-                                                              <span class="input-group-addon">px</span>
-                                                          </div>
-                                                          <div class="input-group input-group-sm">
-                                                              <label class="input-group-addon" for="dataWidth">Width</label>
-                                                              <input type="text" class="form-control" id="dataWidth" name="width" placeholder="width">
-                                                              <span class="input-group-addon">px</span>
-                                                          </div>
-                                                          <div class="input-group input-group-sm">
-                                                              <label class="input-group-addon" for="dataHeight">Height</label>
-                                                              <input type="text" class="form-control" id="dataHeight" name="height" placeholder="height">
-                                                              <span class="input-group-addon">px</span>
-                                                          </div>
-                                                          <div class="input-group input-group-sm">
-                                                              <label class="input-group-addon" for="dataRotate">Rotate</label>
-                                                              <input type="text" class="form-control" id="dataRotate" placeholder="rotate">
-                                                              <span class="input-group-addon">deg</span>
-                                                          </div>
-                                                          <div class="input-group input-group-sm">
-                                                              <label class="input-group-addon" for="dataScaleX">ScaleX</label>
-                                                              <input type="text" class="form-control" id="dataScaleX" placeholder="scaleX">
-                                                          </div>
-                                                          <div class="input-group input-group-sm">
-                                                              <label class="input-group-addon" for="dataScaleY">ScaleY</label>
-                                                              <input type="text" class="form-control" id="dataScaleY" placeholder="scaleY">
-                                                          </div>--%>
-                                                     </div>
-                                                 </div>
+                                                         <div class="input-group input-group-sm">
+                                                             <label class="input-group-addon" for="dataHeight">Height</label>
+                                                             <input type="text" class="form-control" id="dataHeight" name="height" placeholder="height">
+                                                             <span class="input-group-addon">px</span>
+                                                         </div>
+                                                         <div class="input-group input-group-sm">
+                                                             <label class="input-group-addon" for="dataRotate">Rotate</label>
+                                                             <input type="text" class="form-control" id="dataRotate" placeholder="rotate">
+                                                             <span class="input-group-addon">deg</span>
+                                                         </div>
+                                                         <div class="input-group input-group-sm">
+                                                             <label class="input-group-addon" for="dataScaleX">ScaleX</label>
+                                                             <input type="text" class="form-control" id="dataScaleX" placeholder="scaleX">
+                                                         </div>
+                                                         <div class="input-group input-group-sm">
+                                                             <label class="input-group-addon" for="dataScaleY">ScaleY</label>
+                                                             <input type="text" class="form-control" id="dataScaleY" placeholder="scaleY">
+                                                         </div>--%>
+                                                    </div>
+                                                </div>
 
-                                                 <div class="row avatar-btns">
-                                                     <div class="col-md-9">
-                                                         <div class="btn-group">
-                                                             <button class="btn btn-primary" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees">向左旋转</button>
-                                                             <button class="btn btn-primary" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees">向右旋转</button>
-                                                         </div>
-                                                         <div class="btn-group">
-                                                             <button class="btn btn-primary" data-method="rotate" data-option="-15" type="button">-15deg</button>
-                                                             <button class="btn btn-primary" data-method="rotate" data-option="15" type="button">15deg</button>
-                                                         </div>
-                                                         <div class="btn-group">
-                                                             <button class="btn btn-primary" data-method="rotate" data-option="-30" type="button">-30deg</button>
-                                                             <button class="btn btn-primary" data-method="rotate" data-option="30" type="button">30deg</button>
-                                                         </div>
-                                                         <div class="btn-group">
-                                                             <button class="btn btn-primary" data-method="rotate" data-option="-45" type="button">-45deg</button>
-                                                             <button class="btn btn-primary" data-method="rotate" data-option="45" type="button">45deg</button>
-                                                         </div>
-                                                     </div>
-                                                     <div class="col-md-3">
-                                                         <button class="btn btn-primary btn-block avatar-save" type="submit">确定</button>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <!-- <div class="modal-footer">
-                                           <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-                                         </div> -->
-                                     </form>
-                                 </div>
-                             </div>
-                         </div><!-- /.modal -->
+                                                <div class="row avatar-btns">
+                                                    <div class="col-md-9">
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-primary" data-method="rotate"
+                                                                    data-option="-90" type="button"
+                                                                    title="Rotate -90 degrees">向左旋转
+                                                            </button>
+                                                            <button class="btn btn-primary" data-method="rotate"
+                                                                    data-option="90" type="button"
+                                                                    title="Rotate 90 degrees">向右旋转
+                                                            </button>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-primary" data-method="rotate"
+                                                                    data-option="-15" type="button">-15deg
+                                                            </button>
+                                                            <button class="btn btn-primary" data-method="rotate"
+                                                                    data-option="15" type="button">15deg
+                                                            </button>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-primary" data-method="rotate"
+                                                                    data-option="-30" type="button">-30deg
+                                                            </button>
+                                                            <button class="btn btn-primary" data-method="rotate"
+                                                                    data-option="30" type="button">30deg
+                                                            </button>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-primary" data-method="rotate"
+                                                                    data-option="-45" type="button">-45deg
+                                                            </button>
+                                                            <button class="btn btn-primary" data-method="rotate"
+                                                                    data-option="45" type="button">45deg
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <button class="btn btn-primary btn-block avatar-save"
+                                                                type="submit">确定
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="modal-footer">
+                                          <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                                        </div> -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!-- /.modal -->
 
-                         <!-- Loading state -->
-                         <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+                        <!-- Loading state -->
+                        <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
                     </div>
 
                     <table>
@@ -150,32 +171,28 @@
                     </table>
 
                     <div class="panel panel-default" style="width: 98%;">
-                        <div class="panel-footer">
-                            用户：
-                        </div>
+
+                        <a class="list-group-item active">用户：</a>
                         <div class="panel-body">
                             <%=((UserEntity) session.getAttribute("user")).getUsername()%>
                         </div>
-                        <div class="panel-footer">
-                            签名：
-                        </div>
+                        <a class="list-group-item active">签名：</a>
                         <div class="panel-body">
                             <%=((UserEntity) session.getAttribute("user")).getUserintroduce()%>
                         </div>
-                        <div class="panel-footer">
+                        <a class="list-group-item active">
                             性别：
                             <%if (((UserEntity) session.getAttribute("user")).getSex() == 0) {%>
                             汉子
                             <%} else {%>
                             女汉子
                             <%}%>
-                        </div>
-                        <div class="panel-footer">
-                            邮箱：
-                        </div>
+                        </a>
+                        <a class="list-group-item active"> 邮箱：</a>
                         <div class="panel-body">
                             <%=((UserEntity) session.getAttribute("user")).getUseremail()%>
                         </div>
+                        <a href="#" class="list-group-item active">编辑</a>
                     </div>
                 </div>
             </div>

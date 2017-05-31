@@ -48,7 +48,7 @@
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a href="#">Separated link</a>
+                                    <a href="/views/video.jsp">视频</a>
                                 </li>
                                 <li class="divider">
                                 </li>

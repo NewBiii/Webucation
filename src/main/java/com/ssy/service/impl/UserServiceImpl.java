@@ -35,21 +35,22 @@ public class UserServiceImpl implements IUserService {
     @Override  
 	public int register(UserEntity userEntity) 
 	{
-    	int iRet = Consts.RESULT_FAILURE;
+    	int iRet = -1;
     	
     	UserEntity userFromDB = userMapper.selectByPrimaryKey(userEntity.getUserid());
     	
-    	if (userFromDB!=null)
+    	if (userFromDB != null)
     	{
-    		iRet = Consts.RESULT_NOT_UNIQUE;
+    		iRet = 0;
     	}
     	else
     	{
+			userEntity.setRole(1);
 	    	iRet = userMapper.insertSelective(userEntity);
 	
 			if (iRet>0)
 			{
-				iRet = Consts.RESULT_SUCCESS;
+				iRet = 1;
 			} 
     	}
         return iRet;  

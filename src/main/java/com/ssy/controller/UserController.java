@@ -100,22 +100,20 @@ public class UserController {
 
 	@RequestMapping(value = "/register", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView register(UserEntity user) throws Exception {
+		ModelAndView mov = new ModelAndView();
 
 		int iResult = userService.register(user);
 
-		ModelAndView mov = new ModelAndView();
-
-		if (iResult == Consts.RESULT_SUCCESS) {
-			mov.setViewName("/registerResultPage");
-			mov.addObject(Consts.OPERATION_MESSAGE, "注册成功。");
-		} else if (iResult == Consts.RESULT_NOT_UNIQUE) {
-			mov.setViewName("/registerResultPage");
-			mov.addObject(Consts.OPERATION_MESSAGE, "此用户已经注册。");
+		if (iResult == 1) {
+			mov.setViewName("/login.jsp");
+			mov.addObject("result",1);
+		} else if (iResult == 0) {
+			mov.setViewName("/register.jsp");
+			mov.addObject("result",0);
 		} else {
-			mov.setViewName("/registerResultPage");
-			mov.addObject(Consts.OPERATION_MESSAGE, "注册失败。");
+			mov.setViewName("/register.jsp");
+			mov.addObject("result",-1);
 		}
-
 		return mov;
 	}
 

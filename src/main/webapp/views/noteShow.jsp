@@ -60,27 +60,19 @@
                     <img style="width:160px;height:160px;" src="${auther.userpicture}" class="img-circle"/>
                     <br><br>
                     <div class="panel panel-default" style="width: 98%;">
-                        <div class="panel-footer">
-                            作者：
-                        </div>
+                        <a class="list-group-item active">作者：</a>
                         <div class="panel-body">
                             ${auther.username}
                         </div>
-                        <div class="panel-footer">
-                            签名：
-                        </div>
+                        <a class="list-group-item active">签名：</a>
                         <div class="panel-body">
                             ${auther.userintroduce}
                         </div>
-                        <div class="panel-footer">
-                            邮箱：
-                        </div>
+                        <a class="list-group-item active">邮箱：</a>
                         <div class="panel-body">
                             ${auther.useremail}
                         </div>
-                        <div class="panel-footer">
-                            <a href="">查看作者</a>
-                        </div>
+                        <a href="#" class="list-group-item active">查看作者</a>
                     </div>
                 </div>
             </div>

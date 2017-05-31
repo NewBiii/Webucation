@@ -44,17 +44,11 @@
                         <input type="password" class="form-control" id="inputPassword3" name="userpassword"/>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <div class="checkbox">
-                            <label><input type="checkbox" />记住密码</label>
-                        </div>
-                    </div>
-                </div>
+                <br>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary">登录</button>
-                        <a href="register.jsp" class="btn btn-default">注册</a>
+                        <a href="/register.jsp" class="btn btn-default">注册</a>
                     </div>
                 </div>
             </form>
