@@ -3,6 +3,7 @@ package com.ssy.entity;
 import java.util.Date;
 
 public class UserEntity {
+
     private String userid;
 
     private String username;

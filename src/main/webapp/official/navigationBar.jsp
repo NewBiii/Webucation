@@ -31,9 +31,9 @@
                 <dd><a href="/official/JavabaseOfficial4.jsp">Java 对象和类</a></dd>
                 <dd><a href="/official/JavabaseOfficial5.jsp">Java 基本数据类型</a></dd>
                 <dd><a href="/official/JavabaseOfficial6.jsp">Java 变量类型</a></dd>
-                <dd><a href="/official/JavabaseOfficial5.jsp">Java 修饰符</a></dd>
-                <dd><a href="/official/JavabaseOfficial5.jsp">Java 运算符</a></dd>
-                <dd><a href="/official/JavabaseOfficial5.jsp">Java 循环结构 – for, while 及 do…while</a></dd>
+                <dd><a href="/official/JavabaseOfficial7.jsp">Java 修饰符</a></dd>
+                <dd><a href="/official/JavabaseOfficial8.jsp">Java 运算符</a></dd>
+                <dd><a href="/official/JavabaseOfficial9.jsp">Java 循环结构 – for, while 及 do…while</a></dd>
                 <dd><a href="/official/JavabaseOfficial5.jsp">Java 分支结构 – if…else/switch</a></dd>
                 <dd><a href="/official/JavabaseOfficial5.jsp">Java Number & Math 类</a></dd>
                 <dd><a href="/official/JavabaseOfficial5.jsp">Java Character 类</a></dd>

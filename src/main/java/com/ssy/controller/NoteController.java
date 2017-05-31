@@ -35,7 +35,7 @@ public class NoteController {
     private IMessageService messageService;
 
     @RequestMapping(value = "/create", method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView noteSubmit(NoteEntity note, HttpSession session) throws Exception {
+    public ModelAndView create(NoteEntity note, HttpSession session) throws Exception {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
 
@@ -64,7 +64,7 @@ public class NoteController {
             mov.addObject(Consts.OPERATION_MESSAGE, "提交失败。");
         }
 
-        mov.setViewName("/views/test.jsp");
+        mov.setViewName("test.jsp");
 
         return mov;
     }
@@ -81,10 +81,48 @@ public class NoteController {
 
         int result = noteService.updateNote(note);
 
-        System.out.println(result);
+        boolean isColl = false;
 
+        NoteEntity note3 = noteService.getNoteById(note.getNoteid());
 
-        mov.setViewName("/views/test.jsp");
+        if (session.getAttribute("user") != null) {
+            List<CollectionEntity> collEntity = collectionService.getCollByUser(((UserEntity) session.getAttribute("user")).getUserid());
+
+            for (CollectionEntity coll : collEntity) {
+
+                if (Objects.equals(coll.getCourseornoteid(), note3.getNoteid())) {
+
+                    isColl = true;
+                }
+            }
+
+            mov.addObject("iscoll", isColl);
+        }
+        UserEntity user = userService.getUserById(note3.getUserid());
+
+        List<MessageEntity> messagelist = new ArrayList<>();
+        messagelist = messageService.selectByNoteId(note3.getNoteid());
+        List<Map<MessageEntity,List<MessageEntity>>> messagedate = new ArrayList<>();
+        Map<MessageEntity,List<MessageEntity>> messageMap = new HashMap<>();
+        for (MessageEntity message : messagelist) {
+
+            List<MessageEntity> revert = new ArrayList<>();
+            revert = messageService.selectByRevertId(message.getMessageid());
+            messageMap.put(message,revert);
+            /*messagedate.add(messageMap);*/
+        }
+
+        mov.addObject("note", note3);
+        mov.addObject("auther", user);
+        mov.addObject("notename", note3.getNotename());
+        mov.addObject("notecontent", note3.getNotecontent());
+        mov.addObject("message",messageMap);
+
+        session.setAttribute("note", note3);
+        session.setAttribute("allmessage", messageMap);
+
+        mov.setViewName("/views/noteShow.jsp");
+
         return mov;
     }
 

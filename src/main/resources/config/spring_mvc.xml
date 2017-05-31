@@ -67,6 +67,9 @@
 	<mvc:resources mapping="/layui/**" location="/layui/" cache-period="31556926" />
 	<mvc:resources mapping="/croppic/**" location="/croppic/" cache-period="31556926" />
 	<mvc:resources mapping="/cropper/**" location="/cropper/" cache-period="31556926" />
+	<mvc:resources mapping="/bootstrapvalidator/**" location="/bootstrapvalidator/" cache-period="31556926" />
+	<mvc:resources mapping="/js/**" location="/js/" cache-period="31556926" />
+	<mvc:resources mapping="/bootstrap/**" location="/bootstrap/" cache-period="31556926" />
 	<!--<mvc:resources mapping="/upload/**" location="/upload/"	cache-period="31556926" />-->
 
 

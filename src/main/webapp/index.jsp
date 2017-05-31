@@ -15,8 +15,8 @@
 
 </head>
 <body>
-<jsp:include page="views/header.jsp" flush="true"/>
-<br><br><br>
+<jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
+<br><br><br><br>
 
 <div class="container">
     <div class="row clearfix">
@@ -27,7 +27,7 @@
                    SSY课程学习
                 </h1>
                 <p>
-                   我爱学习，学习使我快乐！！！^_^
+                   学习什么的
                 </p>
                 <p>
                     <a class="btn btn-primary btn-large" href="#">了解更多</a>

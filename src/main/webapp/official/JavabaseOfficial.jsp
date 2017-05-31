@@ -16,20 +16,22 @@
 <jsp:include page="/official/navigationBar.jsp" flush="true"/>
 
 <div class="my-content" style="position: absolute;">
+    <div class="container">
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <div class="jumbotron">
                     <h1>
-                        Java 基础学习
+                        Java基础学习
                     </h1>
                     <p>
-                        良好的基本功是学好一门语言前提！！！
+                        This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
                     </p>
                     <p>
                         <a class="btn btn-primary btn-large" href="#">Learn more</a>
                     </p>
                 </div>
             </div>
+        </div>
     </div>
 </div>
 <script src="/croppic/jquery-2.1.3.min.js"></script>

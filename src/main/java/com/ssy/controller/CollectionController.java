@@ -1,10 +1,13 @@
 package com.ssy.controller;
 
 import com.ssy.entity.CollectionEntity;
+import com.ssy.entity.MessageEntity;
 import com.ssy.entity.NoteEntity;
 import com.ssy.entity.UserEntity;
 import com.ssy.service.ICollectionService;
+import com.ssy.service.IMessageService;
 import com.ssy.service.INoteService;
+import com.ssy.service.IUserService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author: NewBiii
@@ -28,8 +30,12 @@ public class CollectionController {
     private ICollectionService collectionService;
     @Resource
     private INoteService noteService;
+    @Resource
+    private IMessageService messageService;
+    @Resource
+    private IUserService userService;
 
-    @RequestMapping(value = "/keep",method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/keep", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView keep(NoteEntity note, HttpSession session) throws Exception {
         ModelAndView mav = new ModelAndView();
 
@@ -37,16 +43,51 @@ public class CollectionController {
 
         CollectionEntity coll = new CollectionEntity();
 
-        coll.setUserid(((UserEntity)session.getAttribute("user")).getUserid());
+        coll.setUserid(((UserEntity) session.getAttribute("user")).getUserid());
         coll.setCourseornoteid(note.getNoteid());
         coll.setIscourseornote(note.getTypee());
 
         collectionService.insertCollection(coll);
 
-        mav.addObject("note",note2);
-        mav.addObject("notename",note2.getNotename());
-        mav.addObject("notecontent",note2.getNotecontent());
-        mav.addObject("iscoll", true);
+        boolean isColl = false;
+
+        NoteEntity note3 = noteService.getNoteById(note.getNoteid());
+
+        if (session.getAttribute("user") != null) {
+            List<CollectionEntity> collEntity = collectionService.getCollByUser(((UserEntity) session.getAttribute("user")).getUserid());
+
+            for (CollectionEntity coll1 : collEntity) {
+
+                if (Objects.equals(coll1.getCourseornoteid(), note3.getNoteid())) {
+
+                    isColl = true;
+                }
+            }
+
+            mav.addObject("iscoll", isColl);
+        }
+        UserEntity user = userService.getUserById(note3.getUserid());
+
+        List<MessageEntity> messagelist = new ArrayList<>();
+        messagelist = messageService.selectByNoteId(note3.getNoteid());
+        List<Map<MessageEntity, List<MessageEntity>>> messagedate = new ArrayList<>();
+        Map<MessageEntity, List<MessageEntity>> messageMap = new HashMap<>();
+        for (MessageEntity message : messagelist) {
+
+            List<MessageEntity> revert = new ArrayList<>();
+            revert = messageService.selectByRevertId(message.getMessageid());
+            messageMap.put(message, revert);
+            /*messagedate.add(messageMap);*/
+        }
+
+        mav.addObject("note", note3);
+        mav.addObject("auther", user);
+        mav.addObject("notename", note3.getNotename());
+        mav.addObject("notecontent", note3.getNotecontent());
+        mav.addObject("message", messageMap);
+
+        session.setAttribute("note", note3);
+        session.setAttribute("allmessage", messageMap);
 
         mav.setViewName("/views/noteShow.jsp");
         return mav;
@@ -60,9 +101,9 @@ public class CollectionController {
 
         List<NoteEntity> noteEntity = new ArrayList<>();
 
-        for (CollectionEntity coll:collList) {
+        for (CollectionEntity coll : collList) {
 
-            noteEntity.add( noteService.getNoteById(coll.getCourseornoteid()));
+            noteEntity.add(noteService.getNoteById(coll.getCourseornoteid()));
         }
 
         int size = noteEntity.size();
@@ -83,9 +124,9 @@ public class CollectionController {
 
         List<NoteEntity> noteEntity = new ArrayList<>();
 
-        for (CollectionEntity coll:collList) {
+        for (CollectionEntity coll : collList) {
 
-            noteEntity.add( noteService.getNoteById(coll.getCourseornoteid()));
+            noteEntity.add(noteService.getNoteById(coll.getCourseornoteid()));
         }
 
         int size = noteEntity.size();
@@ -97,23 +138,55 @@ public class CollectionController {
         return mov;
     }
 
-    @RequestMapping(value = "/delcoll",method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/delcoll", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView delcoll(NoteEntity note, HttpSession session) throws Exception {
         ModelAndView mav = new ModelAndView();
 
-
-        collectionService.deleteByUserAndColl(((UserEntity)session.getAttribute("user")).getUserid(),note.getNoteid());
+        collectionService.deleteByUserAndColl(((UserEntity) session.getAttribute("user")).getUserid(), note.getNoteid());
 
         NoteEntity note2 = noteService.getNoteById(note.getNoteid());
 
-        mav.addObject("note",note2);
-        mav.addObject("notename",note2.getNotename());
-        mav.addObject("notecontent",note2.getNotecontent());
-        mav.addObject("iscoll", false);
+        boolean isColl = false;
+
+        NoteEntity note3 = noteService.getNoteById(note.getNoteid());
+
+        if (session.getAttribute("user") != null) {
+            List<CollectionEntity> collEntity = collectionService.getCollByUser(((UserEntity) session.getAttribute("user")).getUserid());
+
+            for (CollectionEntity coll : collEntity) {
+
+                if (Objects.equals(coll.getCourseornoteid(), note3.getNoteid())) {
+
+                    isColl = true;
+                }
+            }
+
+            mav.addObject("iscoll", isColl);
+        }
+        UserEntity user = userService.getUserById(note3.getUserid());
+
+        List<MessageEntity> messagelist = new ArrayList<>();
+        messagelist = messageService.selectByNoteId(note3.getNoteid());
+        List<Map<MessageEntity, List<MessageEntity>>> messagedate = new ArrayList<>();
+        Map<MessageEntity, List<MessageEntity>> messageMap = new HashMap<>();
+        for (MessageEntity message : messagelist) {
+
+            List<MessageEntity> revert = new ArrayList<>();
+            revert = messageService.selectByRevertId(message.getMessageid());
+            messageMap.put(message, revert);
+            /*messagedate.add(messageMap);*/
+        }
+
+        mav.addObject("note", note3);
+        mav.addObject("auther", user);
+        mav.addObject("notename", note3.getNotename());
+        mav.addObject("notecontent", note3.getNotecontent());
+        mav.addObject("message", messageMap);
+
+        session.setAttribute("note", note3);
+        session.setAttribute("allmessage", messageMap);
 
         mav.setViewName("/views/noteShow.jsp");
         return mav;
     }
-
-
 }
