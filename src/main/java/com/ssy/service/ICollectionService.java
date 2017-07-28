@@ -23,4 +23,3 @@ public interface ICollectionService {
     public List<CollectionEntity> getAllCollForNote(String collection) ;
     public List<CollectionEntity> getAllCollForCourse(String collection) ;
 }
-com.superdemo.service.IUserService
