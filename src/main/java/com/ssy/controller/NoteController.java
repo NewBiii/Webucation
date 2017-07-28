@@ -123,6 +123,10 @@ public class NoteController {
 
         mov.setViewName("/views/noteShow.jsp");
 
+<<<<<<< HEAD
+=======
+        mov.setViewName("test.jsp");
+>>>>>>> e240622d33632ff5c40a872abdd66b17d7ed185b
         return mov;
     }
 
